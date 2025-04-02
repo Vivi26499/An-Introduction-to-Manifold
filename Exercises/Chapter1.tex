@@ -1,0 +1,240 @@
+\documentclass[en, oneside]{vivi}
+
+\ProjectInfos{An Introduction to Manifold}{MATH-512}{Spring, 2025}{Chapter 1}{Euclidean Spaces}{Vivi}[https://github.com/Vivi26499]{24S153073}
+\begin{document}
+
+\section{Smooth Functions on a Euclidean Space}
+\begin{prob}
+    Let $g(x) = \frac{3}{4} x^{4/3}$. Show that the function $h(x) = \int_0^x g(t) \, dt$ is $C^2$ but not $C^3$ at $x = 0$.
+\end{prob}
+
+\begin{sol}
+    \begin{align*}
+        h(x) &= \int_0^x g(t) \dif t\\
+        &= \frac{9}{28} x^{7/3},
+    \end{align*}
+    which is continuous at $x = 0$, thus $h$ is $C^0$ at $x = 0$.\\
+    $h'(x) = g(x) = \frac{3}{4} x^{4/3}$ is continuous at $x = 0$ and hence $h$ is $C^1$ at $x = 0$.
+    \begin{align*}
+        h''(x) &= g'(x) = \frac{3}{4} \cdot \frac{4}{3} x^{1/3} = x^{1/3},
+    \end{align*}
+    which is also continuous at $x = 0$, hence $h$ is $C^2$ at $x = 0$.
+    \begin{equation*}
+        h'''(x) = \frac{1}{3} x^{-2/3},
+    \end{equation*}
+    which is not continuous at $x = 0$ because as $x \to 0$, $h'''(x) \to \infty$. Therefore, $h$ is not $C^3$ at $x = 0$.\\
+    To summarize, we have shown that $h$ is $C^0$, $C^1$, and $C^2$ at $x = 0$, but not $C^3$. Therefore, $h$ is a function that is $C^2$ but not $C^3$ at $x = 0$.
+\end{sol}
+
+\begin{prob}
+    Let $f(x)$ be the function on $\mathbb{R}$ defined by
+    \begin{equation*}
+        f(x) = \begin{cases}
+            e^{-1/x} & \text{if } x > 0,\\
+            0 & \text{if } x \leq 0.
+        \end{cases}
+    \end{equation*}
+    \begin{enumerate}[label=(\alph*)]
+        \item Show by induction that for $x > 0$ and $k \geq 0$, the $k$th derivative $f^{(k)}(x)$ is of the form $p_{2k}(1/x) e^{-1/x}$ for some polynomial $p_{2k}(y)$ of degree $2k$ in $y$.
+        \item Prove that $f$ is $C^\infty$ on $\mathbb{R}$ and that $f^{(k)}(0) = 0$ for all $k \geq 0$.
+    \end{enumerate}
+\end{prob}
+
+\begin{sol}
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $k = 0$. Then, we have $f(x) = e^{-1/x}$ for $x > 0$, and $f^{(0)}(x) = e^{-1/x} = p_0(1/x) e^{-1/x}$, where $p_0(y) = 1$.\\
+        Now, assume that for some $k \geq 0$, the $k$th derivative $f^{(k)}(x)$ is of the form $p_{2k}(\frac{1}{x}) e^{-1/x}$ for some polynomial $p_{2k}(y)$ of degree $2k$.
+        \begin{align*}
+            f^{(k+1)}(x) &= \frac{d}{dx} f^{(k)}(x)\\
+            &= \frac{d}{dx} \left( p_{2k}(\frac{1}{x}) e^{-1/x} \right)\\
+            &= \frac{d}{dx} p_{2k}(\frac{1}{x}) e^{-1/x} + p_{2k}(\frac{1}{x}) \cdot \frac{d}{dx} e^{-1/x}\\
+            &= \frac{d}{dx} \left[ a_{2k} \left( \frac{1}{x} \right)^{2k} + \cdots \right] e^{-1/x} + \left[ a_{2k} \left( \frac{1}{x} \right)^{2k} + \cdots \right] \frac{1}{x^2} e^{-1/x}\\
+            &= \left( -2k a_{2k} \left( \frac{1}{x} \right)^{2k+1} + \cdots \right) e^{-1/x} + \left( a_{2k} \left( \frac{1}{x} \right)^{2k+2} + \cdots \right) \frac{1}{x^2} e^{-1/x}\\
+            &= \left( a_{2k} \left( \frac{1}{x} \right)^{2k+2} -2k a_{2k} \left( \frac{1}{x} \right)^{2k+1} + \cdots \right) e^{-1/x}\\
+            &= p_{2(k+1)}(\frac{1}{x}) e^{-1/x},
+        \end{align*}
+        where $p_{2(k+1)}(y)$ is a polynomial of degree $2(k+1)$. This completes the induction step.
+        \item From the result of part (a), we know that for any $k \geq 0$, the $k$th derivative of $f$ at $x > 0$ is given by
+        \begin{equation*}
+            f^{(k)}(x) = p_{2k}(\frac{1}{x}) e^{-1/x}.
+        \end{equation*}
+        Then, we can evaluate the limit of $f^{(k)}(x)$ as $x$ approaches 0 from the right:
+        \begin{align*}
+            \lim_{x \to 0^+} f^{(k)}(x) &= \lim_{x \to 0^+} p_{2k}(\frac{1}{x}) e^{-1/x}\\
+            &= \lim_{x \to 0^+} p_{2k}(+\infty) e^{-\infty}\\
+            &= 0,
+        \end{align*}
+        which implies that $f^{(k)}(x)$ is continuous at $x = 0$ for all $k \geq 0$, i.e., $f$ is $C^\infty$ at $x = 0$, and $f^{(k)} = 0$ for all $k \geq 0$ at $x = 0$.
+    \end{enumerate}
+\end{sol}
+
+\begin{prob}
+    Let $U \subset \mathbb{R}^n$ and $V \subset \mathbb{R}^n$ be open subsets. A $C^\infty$ map $F : U \to V$ is called a diffeomorphism if it is bijective and has a $C^\infty$ inverse $F^{-1} : V \to U$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that the function $f : ]-\pi/2, \pi/2[ \to \mathbb{R}, \, f(x) = \tan x$, is a diffeomorphism.
+        \item Let $a, b$ be real numbers with $a < b$. Find a linear function $h : ]a, b[ \to ]-1, 1[$, thus proving that any two finite open intervals are diffeomorphic.
+        \item The composite $f \circ h : ]a, b[ \to \mathbb{R}$ is then a diffeomorphism of an open interval with $\mathbb{R}$.
+        \item The exponential function $\exp : \mathbb{R} \to ]0, \infty[$ is a diffeomorphism. Use it to show that for any real numbers $a$ and $b$, the intervals $\mathbb{R}, ]a, \infty[$, and $]-\infty, b[$ are diffeomorphic.
+    \end{enumerate}
+\end{prob}
+
+\begin{prob}
+    Show that the map
+    \begin{equation*}
+        f : \left]-\frac{\pi}{2}, \frac{\pi}{2}\right[^n \to \mathbb{R}^n, \, f(x_1, \ldots, x_n) = (\tan x_1, \ldots, \tan x_n),
+    \end{equation*}
+    is a diffeomorphism.
+\end{prob}
+
+\begin{prob}
+    Let $B(0, 1)$ be the open unit disk in $\mathbb{R}^2$. To find a diffeomorphism between $B(0, 1)$ and $\mathbb{R}^2$, we identify $\mathbb{R}^2$ with the $xy$-plane in $\mathbb{R}^3$ and introduce the lower open hemisphere
+    \begin{equation*}
+        S : x^2 + y^2 + (z - 1)^2 = 1, \quad z < 1,
+    \end{equation*}
+    in $\mathbb{R}^3$ as an intermediate space.
+    \begin{enumerate}[label=(\alph*)]
+        \item The stereographic projection $g : S \to \mathbb{R}^2$ from $(0, 0, 1)$ is the map that sends a point $(a, b, c) \in S$ to the intersection of the line through $(0, 0, 1)$ and $(a, b, c)$ with the $xy$-plane. Show that it is given by
+        \begin{equation*}
+            (a, b, c) \mapsto (u, v) = \left( \frac{a}{1 - c}, \frac{b}{1 - c} \right), \quad c = 1 - \sqrt{1 - a^2 - b^2},
+        \end{equation*}
+        with inverse
+        \begin{equation*}
+            (u, v) \mapsto \left( \frac{u}{\sqrt{1 + u^2 + v^2}}, \frac{v}{\sqrt{1 + u^2 + v^2}}, 1 - \frac{1}{\sqrt{1 + u^2 + v^2}} \right).
+        \end{equation*}
+        \item Composing the two maps $f$ and $g$ gives the map
+        \begin{equation*}
+            h = g \circ f : B(0, 1) \to \mathbb{R}^2, \quad h(a, b) = \left( \frac{a}{\sqrt{1 - a^2 - b^2}}, \frac{b}{\sqrt{1 - a^2 - b^2}} \right).
+        \end{equation*}
+        Find a formula for $h^{-1}(u, v) = (f^{-1} \circ g^{-1})(u, v)$ and conclude that $h$ is a diffeomorphism of the open disk $B(0, 1)$ with $\mathbb{R}^2$.
+        \item Generalize part (b) to $\mathbb{R}^n$.
+    \end{enumerate}
+\end{prob}
+
+\begin{prob}
+    Prove that if $f : \mathbb{R}^2 \to \mathbb{R}$ is $C^\infty$, then there exist $C^\infty$ functions $g_{11}, g_{12}, g_{22}$ on $\mathbb{R}^2$ such that
+    \begin{equation*}
+        f(x, y) = f(0, 0) + \frac{\partial f}{\partial x}(0, 0)x + \frac{\partial f}{\partial y}(0, 0)y + x^2 g_{11}(x, y) + xy g_{12}(x, y) + y^2 g_{22}(x, y).
+    \end{equation*}
+\end{prob}
+
+\begin{sol}
+    Applying Taylor's theorem with remainder, we have
+    \begin{equation*}
+        f(x, y) = f(0, 0) + x f_1(x, y) + y f_2(x, y),
+    \end{equation*}
+    where $f_1(x, y) = \frac{\partial f}{\partial x}(x, y)$ and $f_2(x, y) = \frac{\partial f}{\partial y}(x, y)$.\\
+    As $f$ is $C^\infty$, both $f_1(x, y)$ and $f_2(x, y)$ are also $C^\infty$ functions. We can expand $f_1(x, y)$ and $f_2(x, y)$ using Taylor's theorem around $(0, 0)$ as follows:
+    \begin{align*}
+        f_1(x, y) &= f_1(0, 0) + x f_{11}(x, y) + y f_{12}(x, y),\\
+        f_2(x, y) &= f_2(0, 0) + x f_{21}(x, y) + y f_{22}(x, y).
+    \end{align*}
+    Then, we can substitute these expansions back into the expression for $f(x, y)$ to obtain:
+    \begin{align*}
+        f(x, y) &= f(0, 0) + x \left( f_1(0, 0) + x f_{11}(x, y) + y f_{12}(x, y) \right) + y \left( f_2(0, 0) + x f_{21}(x, y) + y f_{22}(x, y) \right)\\
+        &= f(0, 0) + \frac{\partial f}{\partial x}(0, 0)x + \frac{\partial f}{\partial y}(0, 0)y + x^2 f_{11}(x, y) + 2xy f_{12}(x, y) + y^2 f_{22}(x, y).
+    \end{align*}
+    Then by defining $g_{11}(x, y) = f_{11}(x, y)$, $g_{12}(x, y) = 2f_{12}(x, y)$, and $g_{22}(x, y) = f_{22}(x, y)$, we get the desired result.
+\end{sol}
+
+\begin{prob}
+    Let $f : \mathbb{R}^2 \to \mathbb{R}$ be a $C^\infty$ function with $f(0, 0) = \frac{\partial f}{\partial x}(0, 0) = \frac{\partial f}{\partial y}(0, 0) = 0$. Define
+    \begin{equation*}
+        g(t, u) =
+        \begin{cases}
+            \frac{f(t, tu)}{t} & \text{for } t \neq 0,\\
+            0 & \text{for } t = 0.
+        \end{cases}
+    \end{equation*}
+    Prove that $g(t, u)$ is $C^\infty$ for $(t, u) \in \mathbb{R}^2$. (Hint: Apply Problem 1.6.)
+\end{prob}
+
+\begin{prob}
+    Define $f : \mathbb{R} \to \mathbb{R}$ by $f(x) = x^3$. Show that $f$ is a bijective $C^\infty$ map, but that $f^{-1}$ is not $C^\infty$. (This example shows that a bijective $C^\infty$ map need not have a $C^\infty$ inverse. In complex analysis, the situation is quite different: a bijective holomorphic map $f : \mathbb{C} \to \mathbb{C}$ necessarily has a holomorphic inverse.)
+\end{prob}
+
+\mathsection{Tangent Vectors in $\mathbb{R}^n$ as Derivations}{Tangent Vectors in Rn as Derivations}
+\begin{prob}
+    Let $X$ be the vector field $x \partial / \partial x + y \partial / \partial y$ and $f(x, y, z)$ the function $x^2 + y^2 + z^2$ on $\mathbb{R}^3$. Compute $Xf$.
+\end{prob}
+
+\begin{sol}
+    \begin{align*}
+        Xf &= \left( x \frac{\partial}{\partial x} + y \frac{\partial}{\partial y} \right) (x^2 + y^2 + z^2)\\
+        &= 2x^2 + 2y^2
+    \end{align*}
+\end{sol}
+
+\begin{prob}
+    Define carefully addition, multiplication, and scalar multiplication in $C_p^\infty$. Prove that addition in $C_p^\infty$ is commutative.
+\end{prob}
+
+\begin{sol}
+    Let $[f]_p, [g]_p \in C_p^\infty$. We define the addition of two equivalence classes as follows:
+    \begin{equation*}
+        [f]_p + [g]_p = [f + g]_p,
+    \end{equation*}
+    where $f + g$ is the pointwise sum of the functions $f$ and $g$.\\
+    The multiplication of two equivalence classes is defined as:
+    \begin{equation*}
+        [f]_p \cdot [g]_p = [fg]_p,
+    \end{equation*}
+    where $fg$ is the pointwise product of the functions $f$ and $g$.\\
+    The scalar multiplication of an equivalence class by a scalar $c \in \mathbb{R}$ is defined as:
+    \begin{equation*}
+        c[f]_p = [cf]_p,
+    \end{equation*}
+    where $cf$ is the pointwise product of the function $f$ and the scalar $c$.
+\end{sol}
+
+\begin{prob}
+    Let $D$ and $D'$ be derivations at $p$ in $\mathbb{R}^n$, and $c \in \mathbb{R}$. Prove that
+    \begin{enumerate}[label=(\alph*)]
+        \item the sum $D + D'$ is a derivation at $p$.
+        \item the scalar multiple $cD$ is a derivation at $p$.
+    \end{enumerate}
+\end{prob}
+
+\begin{sol}
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $f, g \in C^\infty(\mathbb{R}^n)$, then we have
+        \begin{align*}
+            (D + D')(fg) &= D(fg) + D'(fg)\\
+            &= D(f)g(p) + f(p)D(g) + D'(f)g(p) + f(p)D'(g)\\
+            &= (D(f) + D'(f))g(p) + f(p)(D(g) + D'(g))\\
+            &= (D + D')(f)g(p) + f(p)(D + D')(g).
+        \end{align*}
+        \item \begin{align*}
+            (cD)(fg) &= cD(fg)\\
+            &= c(D(f)g(p) + f(p)D(g))\\
+            &= cD(f)g(p) + cf(p)D(g)\\
+            &= (cD)(f)g(p) + f(p)(cD)(g).
+        \end{align*}
+    \end{enumerate}
+\end{sol}
+
+\begin{prob}
+    Let $A$ be an algebra over a field $K$. If $D_1$ and $D_2$ are derivations of $A$, show that $D_1 \circ D_2$ is not necessarily a derivation (it is if $D_1$ or $D_2 = 0$), but $D_1 \circ D_2 - D_2 \circ D_1$ is always a derivation of $A$.
+\end{prob}
+
+\begin{sol}
+    Let $f: \mathbb{R} \to \mathbb{R}$ be a function such that $f(x) = x$, and let $D_1 = D_2 = \frac{\dif}{\dif x}$. Then, for the Lebniz rule, we have
+    \begin{align*}
+        D_1 \circ D_2(f f) &= \frac{\dif}{\dif x} \left( \frac{\dif}{\dif x} (x^2) \right)\\
+        &= \frac{\dif}{\dif x} (2x)\\
+        &= 2,
+    \end{align*}
+    but
+    \begin{align*}
+        (D_2 \circ D_1)(f)f(p) + f(p)(D_2 \circ D_1)(f) &= \frac{\dif^2 x}{\dif x^2} p + p \frac{\dif^2 x}{\dif x^2}\\
+        &= 0.
+    \end{align*}
+    Therefore, $D_1 \circ D_2$ is not a derivation.
+    Next, for $D_1 \circ D_2 - D_2 \circ D_1$, we examine the Lebniz rule:
+    \begin{align*}
+        (D_1 \circ D_2 - D_2 \circ D_1)(f g) &= D_1 \circ D_2(f g) - D_2 \circ D_1(f g)\\
+        &= D_1[D_2(f)g(p) + f(p)D_2(g)] - D_2[D_1(f)g(p) + f(p)D_1(g)]\\
+        &= (D_1 \circ D_2(f)g(p) + f(p)D_1 \circ D_2(g)) - (D_2 \circ D_1(f)g(p) + f(p)D_2 \circ D_1(g))\\
+        &= (D_1 \circ D_2 - D_2 \circ D_1)(f)g(p) + f(p)(D_1 \circ D_2 - D_2 \circ D_1)(g).
+    \end{align*}
+\end{sol}
+\end{document}
