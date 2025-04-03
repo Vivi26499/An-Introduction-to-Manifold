@@ -113,6 +113,16 @@
   },
 )
 
+#let lemma = theorem.with(
+  kind: "Lemma",
+  supplement: "Lemma",
+  fmt-prefix: (s, n, t) => {
+    text(weight: "bold", stretch: 85%)[#s #n]
+    if t != none [ (#t)]
+    h(1em)
+  },
+)
+
 // 2. Example
 #let example = theorem.with(
   kind: "example",

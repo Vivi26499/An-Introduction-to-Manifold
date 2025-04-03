@@ -54,8 +54,13 @@
   is a polynomial of degree $2k$. Then we can evaluate the limit as $x$ approaches $0$ from the right:
   $ lim_(x arrow.r 0^+) f((k)) (x) &= lim_(x arrow.r 0^+) p_(2k)(1/x)e^(-1/x) \
   &= 0, $
-  which implies that $f^((k))(0) = 0$ for all $k gt.eq 0$, and thus $f$ is $C^infinity$ on $RR$. \
-  
+  which implies that $f^((k))(0) = 0$ for all $k gt.eq 0$, and thus $f$ is $C^infinity$ on $RR$.
 ]
 
-#section[Convexity and Subgradients]
+#prob[
+  Let $U, V in RR^n$ be two open sets. A $C^infinity$ map $F: U arrow.r V$ is called a diffeomorphism if it is bijective and has a $C^infinity$ inverse $F^(-1): V arrow.r U$.
+  + Show that the function $f:(-pi/2, pi/2) arrow.r RR$, $f(x) = tan x$, is a diffeomorphism.
+  + Let $a, b$ be real numbers with $a < b$. Find a linear function $h:(a, b) arrow.r (-1, 1)$, thus proving that any finite open intervals are diffeomorphic.
+  + The composite $f circle.small h: (a, b) arrow.r RR$ is then a diffeomorphism of an open interval with $RR$.
+  + The exponential function exp: $RR arrow.r (0, infinity)$ is a diffeomorphism. Use it to show that for any real numbers $a$ and $b$, the intervals $RR, (a, infinity)$, and $(-infinity, b)$ are diffeomorphic.
+]
