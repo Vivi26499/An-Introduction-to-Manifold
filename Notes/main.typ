@@ -59,7 +59,7 @@ $
   c(t) = (p^1 + t v^1, dots.c, p^n + t v^n).
 $
 #definition[
-  If $f$ is $C^infinity$ in a neighborhood of $p$ in $RR^n$, the *directional derivative* of $f$ at $p$ in the direction of $v$ is defined as the limit $ {lr(1/2x^2|)^(x=n)_(x=0) + (2x+3)} $
+  If $f$ is $C^infinity$ in a neighborhood of $p$ in $RR^n$, the *directional derivative* of $f$ at $p$ in the direction of $v$ is defined as the limit
   $
     D_v f &= lim_(t arrow.r 0) (f(c(t)) - f(c(0))) / t \
     &= lr(dif/(dif t)|)_(t=0) f(c(t)) \
