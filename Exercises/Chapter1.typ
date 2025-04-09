@@ -111,3 +111,126 @@ $
     f(x, y) = f(0, 0) + (diff f)/(diff x)(0, 0)x + (diff f)/(diff y)(0, 0)y + x^2 g_(11)(x, y) + x y g_(12)(x, y) + y^2 g_(22)(x, y). 
   $
 ]
+
+#sol[
+  Applying Taylor's theorem with remainder, we have
+  $ 
+    f(x, y) = f(0, 0) + x f_1(x, y) + y f_2(x, y), 
+  $
+  where $f_1(x, y) = (diff f)/(diff x)(x, y)$ and $f_2(x, y) = (diff f)/(diff y)(x, y)$。
+
+  As $f$ is $C^infinity$, $f_1(x, y)$ and $f_2(x, y)$ are also $C^infinity$. we can expand $f_1(x, y)$ and $f_2(x, y)$ using Taylor's theorem with remainder around $(0, 0)$:
+  $ 
+    f_1(x, y) &= f_1(0, 0) + x f_(11)(x, y) + y f_(12)(x, y), \
+    f_2(x, y) &= f_2(0, 0) + x f_(21)(x, y) + y f_(22)(x, y). 
+  $
+
+  Then, we can substitute these expansions back into the expression for $f(x, y)$:
+  $ 
+    f(x, y) &= f(0, 0) + x (f_1(0, 0) + x f_(11)(x, y) + y f_(12)(x, y)) + y (f_2(0, 0) + x f_(21)(x, y) + y f_(22)(x, y)) \
+    &= f(0, 0) + (diff f)/(diff x)(0, 0)x + (diff f)/(diff y)(0, 0)y + x^2 f_(11)(x, y) + 2x y f_(12)(x, y) + y^2 f_(22)(x, y). 
+  $
+
+  Then by defining $g_(11)(x, y) = f_(11)(x, y)$, $g_(12)(x, y) = 2f_(12)(x, y)$, and $g_(22)(x, y) = f_(22)(x, y)$, we get the desired result.
+]
+
+#prob[
+  Let $f: RR^2 -> RR$ be a $C^infinity$ function with $f(0, 0) = (diff f)/(diff x)(0, 0) = (diff f)/(diff y)(0, 0) = 0$. Define
+  $ 
+    g(t, u) = cases(
+      f(t, t u)/t & "for" t != 0,
+      0 & "for" t = 0.
+    ) 
+  $
+  Prove that $g(t, u)$ is $C^infinity$ for $(t, u) in RR^2$. (Hint: Apply Problem 1.6.)
+]
+
+#prob[
+  Define $f: RR -> RR$ by $f(x) = x^3$. Show that $f$ is a bijective $C^infinity$ map, but that $f^(-1)$ is not $C^infinity$. (This example shows that a bijective $C^infinity$ map need not have a $C^infinity$ inverse. In complex analysis, the situation is quite different: a bijective holomorphic map $f: CC -> CC$ necessarily has a holomorphic inverse.)
+]
+
+#section[Tangent Vectors in $RR^n$ as Derivations]
+
+#prob[
+  Let $X$ be the vector field $x diff / (diff x) + y diff / (diff y)$ and $f(x, y, z)$ the function $x^2 + y^2 + z^2$ on $RR^3$. Compute $X f$.
+]
+
+#sol[
+  $ 
+    X f &= (x diff/(diff x) + y diff/(diff y)) (x^2 + y^2 + z^2) \
+    &= 2x^2 + 2y^2 
+  $
+]
+
+#prob[
+  Define carefully addition, multiplication, and scalar multiplication in $C_p^infinity$. Prove that addition in $C_p^infinity$ is commutative.
+]
+
+#sol[
+  Let $[f]_p, [g]_p in C_p^infinity$. We define the addition of two equivalence classes as follows:
+  $ 
+    [f]_p + [g]_p = [f + g]_p, 
+  $
+  where $f + g$ is the pointwise sum of the functions $f$ and $g$. \
+  The multiplication of two equivalence classes is defined as:
+  $ 
+    [f]_p dot [g]_p = [f g]_p, 
+  $
+  where $f g$ is the pointwise product of the functions $f$ and $g$. \
+  The scalar multiplication of an equivalence class by a scalar $c in RR$ is defined as:
+  $ 
+    c[f]_p = [c f]_p, 
+  $
+  where $c f$ is the pointwise product of the function $f$ and the scalar $c$.
+]
+
+#prob[
+  Let $D$ and $D'$ be derivations at $p$ in $RR^n$, and $c in RR$. Prove that
+  + the sum $D + D'$ is a derivation at $p$.
+  + the scalar multiple $c D$ is a derivation at $p$.
+]
+
+#sol[
+  + Let $f, g in C^infinity(RR^n)$, then we have
+    $ 
+      (D + D')(f g) &= D(f g) + D'(f g) \
+      &= D(f)g(p) + f(p)D(g) + D'(f)g(p) + f(p)D'(g) \
+      &= (D(f) + D'(f))g(p) + f(p)(D(g) + D'(g)) \
+      &= (D + D')(f)g(p) + f(p)(D + D')(g). 
+    $
+  + $ 
+      (c D)(f g) &= c D(f g) \
+      &= c(D(f)g(p) + f(p)D(g)) \
+      &= c D(f)g(p) + c f(p)D(g) \
+      &= (c D)(f)g(p) + f(p)(c D)(g). 
+    $
+]
+
+#prob[
+  Let $A$ be an algebra over a field $K$. If $D_1$ and $D_2$ are derivations of $A$, show that $D_1 compose D_2$ is not necessarily a derivation (it is if $D_1$ or $D_2 = 0$), but $D_1 compose D_2 - D_2 compose D_1$ is always a derivation of $A$.
+]
+
+#sol[
+  Let $f: RR -> RR$ be a function such that $f(x) = x$, and let $D_1 = D_2 = dif/(dif x)$. Then, for the Lebniz rule, we have
+  $ 
+    D_1 compose D_2(f f) &= dif/(dif x) (dif/(dif x) (x^2)) \
+    &= dif/(dif x) (2x) \
+    &= 2, 
+  $
+  but
+  $ 
+    (D_2 compose D_1)(f)f(p) + f(p)(D_2 compose D_1)(f) &= dif^2 x/(dif x^2) p + p dif^2 x/(dif x^2) \
+    &= 0. 
+  $
+  Therefore, $D_1 compose D_2$ is not a derivation. \
+  Next, for $D_1 compose D_2 - D_2 compose D_1$, we examine the Lebniz rule:
+  $ 
+    (D_1 compose D_2 - D_2 compose D_1)(f g) &= D_1 compose D_2(f g) - D_2 compose D_1(f g) \
+    &= D_1[D_2(f)g(p) + f(p)D_2(g)] \- D_2[D_1(f)g(p) + f(p)D_1(g)] \
+    &= (D_1 compose D_2(f)g(p) + f(p)D_1 compose D_2(g)) \
+    &- (D_2 compose D_1(f)g(p) + f(p)D_2 compose D_1(g)) \
+    &= (D_1 compose D_2 - D_2 compose D_1)(f)g(p) + f(p)(D_1 compose D_2 - D_2 compose D_1)(g). 
+  $
+  Thus, $D_1 compose D_2 - D_2 compose D_1$ satisfies the Leibniz rule and is a derivation.
+]
+
