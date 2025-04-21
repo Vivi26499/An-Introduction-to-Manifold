@@ -265,3 +265,113 @@ $
   X &arrow.r.bar (f arrow.r.bar X f),
 $
 which is an isomorphism of vector spaces, just as the map $phi.alt: T_p (RR^n) arrow.r cal(D)_p (RR^n)$.
+
+= The Exterior Algebra of Multicovectors
+
+== Dual Spaces
+#definition[
+  If $V$ and $W$ are real vector spaces, we denote by $"Hom"(V, W)$ the vector space of all linear maps $f: V arrow.r W$. \
+  The *dual space* $V^or$ of $V$ is the vector space of all the real-valued linear functions on $V$:
+  $
+    V^or = "Hom"(V, RR).
+  $
+  The elements of $V^or$ are called *covectors* or *1-covectors* on $V$.
+]
+In the rest of this section, assume $V$ to be a _finite-dimensional_ vector space. Let $e_1, dots.c, e_n$ be a basis of $V$. Then every $v in V$ is uniquely a linear combination $v = v^i e_i$ with $v^i in RR$. \
+Let $alpha^i: V arrow.r RR$ be the linear function that picks out the $i$th coordinate, $alpha^i (v) = v^i$. Note that
+$
+  alpha^i (e_j) = delta^i_j.
+$
+#proposition[
+  The functions $alpha^1, dots.c, alpha^n$ form a basis of $V^or$.
+]
+#proof[
+  Let $f in V^or$ and $v = v^i e_i in V$, then
+  $
+    f(v) &= v^i f(e_i) \
+    &= f(e_i) alpha^i (v),
+  $
+  which means $f = f(e_i) alpha^i$, i.e., $alpha^1, dots.c, alpha^n$ span $V^or$. \
+  Suppose $c_i alpha^i = 0$ for some $c_i in RR$. Applying both sides to $e_j$ gives
+  $
+    0 &= c_i alpha^i (e_j) \
+    &= c_i delta^i_j \
+    &= c_j,
+  $
+  which means $alpha^1, dots.c, alpha^n$ are linear independent.
+]
+The basis $alpha^1, dots.c, alpha^n$ of $V^or$ is said to be _dual_ to the basis $e_1, dots.c, e_n$ of $V$.
+
+== Permutations
+#definition[
+  Fix a positive integer $k$. A *permutation* of a set $A = {1, dots.c, k}$ is a bijection $sigma: A arrow.r A$. $sigma$ can be thought of as a reordering of the list $1, dots.c, k$ from $1, dots.c, k$ to $sigma(1), dots.c, sigma(k)$. \
+  A simple way to describe a permutation is by its matrix
+  $
+    M(sigma) = mat(1, dots.c, k; sigma(1), dots.c, sigma(k) ;delim: "[").
+  $
+  The *cyclic permutation*, $(a_1 thick dots.c thick a_r)$ where $a_i$ are distinct, is the permutation $sigma$ such that $sigma(a_1) = a_2, dots.c, sigma(a_(r-1)) = a_r, sigma(a_r) = a(1)$ and fixes all other elements of $A$. A cyclic permutation $(a_1, dots.c, a_r)$ is called a *cycle of length $r$* or a *r-cycle*. \
+  A *transposition* is a $2$-cycle, i.e., a cycle of the form $(a_1 thick a_2)$ that interchanges $a_1$ and $a_2$ and fixes all other elements of $A$. \
+  Two cycles $(a_1 thick dots.c thick a_r)$ and $(b_1 thick dots.c thick b_s)$ are *disjoint* if $a_i eq.not b_j$ for all $i$ and $j$. \
+  The *product* $tau sigma$ of two permutations $sigma$ and $tau$ of $A$ is the composition $tau thick circle.small thick sigma$.
+]
+Any permutation can be written as a product of disjoint cycles $(a_1 thick dots.c thick a_r)(b_1 thick dots.c thick b_s) thick dots.c$.
+#definition[
+  Let $S_k$ be the set of all permutations of the set ${1, dots.c, k}$. A permutation is *even* or *odd* if it can be expressed as a product of an even or odd number of transpositions, respectively. \
+  The *sign* of a permutation $sigma in S_k$ is defined as
+  $
+    "sgn"(sigma) = cases(
+      1"," &"if" sigma "is even",
+      -1"," &"if" sigma "is odd".
+    )
+  $
+  Clearly, $"sgn"(sigma tau) = "sgn"(sigma) "sgn"(tau)$ for all $sigma, tau in S_k$.
+]
+Generally, the $r$-cycle can be decomposed into $r-1$ transpositions:
+$
+  (a_1 thick dots.c thick a_r) = (a_1 thick a_r)(a_1 thick a_(r-1)) thick dots.c thick (a_1 thick a_2),
+$
+which means that an $r$-cycle is even if $r$ is odd and odd if $r$ is even. Thus one way to compute the sign of a permutation is to decompose it into a product of disjoint cycles and count the number of even-length cycles. \
+#definition[
+  An *inversion* of a permutation $sigma$ is an ordered pair $(sigma(i), sigma(j))$ such that $i lt j$ but $sigma(i) gt sigma(j)$. 
+]
+The second way to compute the sign of a permutation is to count the number of inversions. \
+#proposition[
+  A permutation $sigma$ can be written as a product of as many transpositions as the number of inversions it has, so $sigma$ is even if and only if it has an even number of inversions.
+]
+
+== Multilinear Functions
+#definition[
+  Denote by $V^k = V times dots.c times V$ the Cartesian product of $k$ copies of a real vector space $V$. A function $f: V^k arrow.r RR$ is called *$k$-linear* if it is linear in each of its $k$ arguments:
+  $
+    f(dots.c, a v + b w, dots.c) = a f(dots.c, v, dots.c) + b f(dots.c, w, dots.c)
+  $
+  for all $a, b in RR$ and $v, w in V$. Instead of $2$-linear and $3$-linear, it is customary to say *bilinear* and *trilinear*, respectively. \
+  A $k$-linear function on $V$ is also called a *$k$-tensor* on $V$. We denote the vector space of all $k$-tensors on $V$ by $L_k (V)$, $k$ is called the *degree* of the tensor $f$. 
+]
+#example[
+  + The dot product $f(v, w) = v dot w$ on $RR^n$ is bilinear. 
+  + The determinant $f(v_1, dots.c, v_n) = det[v_1 thick dots.c thick v_n]$ on $RR^n$ is $n$-linear.
+]
+#definition[
+  A $k$-linear function $f: V^k arrow.r RR$ is *symmetric* if
+  $
+    f(v_sigma(1), dots.c, v_sigma(k)) = f(v_1, dots.c, v_k)
+  $
+  for all permutations $sigma in S_k$. \
+  A $k$-linear function $f: V^k arrow.r RR$ is *alternating* if
+  $
+    f(v_sigma(1), dots.c, v_sigma(k)) = ["sgn"(sigma)] f(v_1, dots.c, v_k)
+  $
+  for all permutations $sigma in S_k$.
+]
+#example[
+  + The dot product $f(v, w) = v dot w$ on $RR^n$ is symmetric.
+  + The determinant $f(v_1, dots.c, v_n) = det[v_1 thick dots.c thick v_n]$ on $RR^n$ is alternating.
+  + The cross product $f(v, w) = v times w$ on $RR^3$ is alternating.
+]
+We are escpecially interested in the space $A_k (V)$ of all alternating $k$-linear functions on $V$ for $k gt 0$. They are also called *alternating $k$-tensors*, *$k$-covectors*, or *multicovectors of degree $k$* on $V$. 
+#definition[
+  The vector space of all alternating $k$-linear functions on $V$ is denoted by $A_k (V)$, the elements of $A_k (V)$ are also called *alternating $k$-tensors*, *$k$-covectors*, or *multicovectors of degree $k$* on $V$. \
+  For $k = 0$, we define a $0$-covector to be a constant, so $A_0 (V) = RR$. \
+  For $k = 1$, a $1$-covector is simply a covector.
+]

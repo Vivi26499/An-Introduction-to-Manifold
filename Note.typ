@@ -123,6 +123,26 @@
   },
 )
 
+#let proposition = theorem.with(
+  kind: "Proposition",
+  supplement: "Proposition",
+  fmt-prefix: (s, n, t) => {
+    text(weight: "bold", stretch: 85%)[#s #n]
+    if t != none [ (#t)]
+    h(1em)
+  },
+)
+
+#let corollary = theorem.with(
+  kind: "Corollary",
+  supplement: "Corollary",
+  fmt-prefix: (s, n, t) => {
+    text(weight: "bold", stretch: 85%)[#s #n]
+    if t != none [ (#t)]
+    h(1em)
+  },
+)
+
 // 2. Example
 #let example = theorem.with(
   kind: "example",
@@ -149,28 +169,6 @@
   supplement: "Note",
   fmt-prefix: (s, n, t) => {
     text(weight: "bold", stretch: 85%)[#s #n]
-    if t != none [ (#t)]
-    h(1em)
-  },
-)
-
-// 5. Exercise
-#let exercise = theorem.with(
-  kind: "exercise",
-  supplement: "Exercise",
-  fmt-prefix: (s, n, t) => {
-    text(weight: "bold", stretch: 85%)[#s #n]
-    if t != none [ (#t)]
-    h(1em)
-  },
-)
-
-// 6. Solution
-#let solution = theorem.with(
-  kind: "solution",
-  supplement: "Solution",
-  fmt-prefix: (s, n, t) => {
-    text(weight: "bold")[#s:]
     if t != none [ (#t)]
     h(1em)
   },
