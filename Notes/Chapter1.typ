@@ -8,6 +8,7 @@
   author: "Vivi",
   toc-title: "Chapter 1 Euclidean Spaces",
 )
+#show ref: theoretic.show-ref
 #set enum(numbering: "(i)")
 = Smooth Functions on a Euclidean Space
 The calculus of $C^infinity$ functions will be our primary tool for studying higher-dimensional manifolds.
@@ -375,3 +376,394 @@ We are escpecially interested in the space $A_k (V)$ of all alternating $k$-line
   For $k = 0$, we define a $0$-covector to be a constant, so $A_0 (V) = RR$. \
   For $k = 1$, a $1$-covector is simply a covector.
 ]
+
+== The Permutation Action on Multilinear Functions
+#definition[
+  If $f in L_k (V)$ and $sigma in S_k$ is a permutation, we define a new $k$-linear function $sigma f$ by
+  $
+    (sigma f)(v_1, dots.c, v_k) = f(v_sigma(1), dots.c, v_sigma(k)).
+  $
+  Thus $f$ is symmetric if and only if $sigma f = f$ for all $sigma in S_k$, and $f$ is alternating if and only if $sigma f = ["sgn"(sigma)] f$ for all $sigma in S_k$.
+]
+When there is only one argument, the permutation group $S_1$ is the identity group and a $1$-linear function is both symmetric and alternating. In particular, 
+$
+  A_1 (V) = L_1 (V) = V^or.
+$
+#lemma[
+  If $sigma, tau in S_k$ and $f in L_k (V)$, then $tau(sigma f) = (tau sigma) f$.
+]
+#proof[
+  For $v_1, dots.c, v_k in V$, we have
+  $
+    (tau(sigma f))(v_1, dots.c, v_k) &= (sigma f)(v_tau(1), dots.c, v_tau(k)) \
+    &= f(v_sigma(tau(1)), dots.c, v_sigma(tau(k))) \
+    &= f(v_((tau sigma)(1)), dots.c, v_((tau sigma)(k))) \
+    &= (tau sigma) f(v_1, dots.c, v_k).
+  $
+]
+#definition[
+  If $G$ is a group and $X$ is a set, a map
+  $
+    G times X &arrow.r X, \
+    (sigma, x) &arrow.r.bar sigma dot x
+  $
+  is called a *left action* of $G$ on $X$ if for all $sigma, tau in G$ and $x in X$,
+  + $e dot x = x$, where $e$ is the identity element of $G$,
+  + $tau dot (sigma dot x) = (tau sigma) dot x$.
+  The *orbit* of an element $x in X$ is the set
+  $
+    G x := {sigma dot x in X | sigma in G}
+  $
+  A *right action* of $G$ on $X$ is defined similarly: it is a map
+  $
+    X times G &arrow.r X, \
+    (x, sigma) &arrow.r.bar x dot sigma
+  $
+  such that for all $sigma, tau in G$ and $x in X$,
+  + $x dot e = x$, 
+  + $(x dot tau) dot sigma = x dot (tau sigma)$.
+]
+In this terminology, we have defined a left action of $S_k$ on $L_k (V)$.
+
+== The Symmetrizing and Alternating Operators
+#definition[
+  Given any $k$-linear function $f$ on $V$, we can make a symmetric $k$-linear function $S f$ by
+  $
+    (S f)(v_1, dots.c, v_k) = sum_(sigma in S_k) f(v_sigma(1), dots.c, v_sigma(k))
+  $
+  or, in our new sharthand, the *symmetric operator* $S$ is defined by
+  $
+    S f = sum_(sigma in S_k) sigma f.
+  $
+  Similarly, the *alternating operator* $A$ is defined by
+  $
+    A f = sum_(sigma in S_k) ["sgn"(sigma)] sigma f.
+  $
+]
+
+#proposition(label: <symalt>)[ 
+  If $f$ is a $k$-linear function on $V$, then
+  + $S f$ is symmetric,
+  + $A f$ is alternating.
+]
+#proof[
+  + For $tau in S_k$, we have
+  $
+    (tau S f) &= sum_(sigma in S_k) tau (sigma f) \
+    &= sum_(sigma in S_k) (tau sigma) f \
+    &= S f,
+  $
+  which means $S f$ is symmetric. 
+  + For $tau in S_k$, we have
+  $
+    (tau A f) &= sum_(sigma in S_k) ["sgn"(sigma)] tau (sigma f) \
+    &= sum_(sigma in S_k) ["sgn"(sigma)] (tau sigma) f \
+    &= ["sgn"(tau)] sum_(sigma in S_k) ["sgn"(tau sigma)] (tau sigma) f \
+    &= ["sgn"(tau)] A f,
+  $
+  which means $A f$ is alternating.
+]
+
+#lemma[
+  If $f in A_k (V)$, then $A f = (k!) f$.
+]
+#proof[
+  Since $f in A_k (V)$, we have $sigma f = ["sgn"(sigma)] f$ for all $sigma in S_k$. Thus,
+  $
+    A f &= sum_(sigma in S_k) ["sgn"(sigma)] sigma f \
+    &= sum_(sigma in S_k) ["sgn"(sigma)] ["sgn"(sigma)] f \
+    &= sum_(sigma in S_k) f \
+    &= (k!) f.
+  $
+]
+
+== The Tensor Product
+#definition[
+  Let $f in L_k (V)$ and $g in L_l (V)$. The *tensor product* of $f$ and $g$ is the $k + l$-linear function $f times.circle g$ defined by
+  $
+    (f times.circle g)(v_1, dots.c, v_k, v_(k+1), dots.c, v_(k+l)) = f(v_1, dots.c, v_k) g(v_(k+1), dots.c, v_(k+l)).
+  $
+]
+
+#example[
+  _Bilinear maps_. Let $e_1, dots.c, e_n$ be a basis of $V$, $alpha^1, dots.c, alpha^n$ the dual basis of $V^or$, and
+  $
+    angle.l thick, thick angle.r: V times V arrow.r RR
+  $
+  a bilinear map on $V$. Set $g_(i j) = angle.l e_i, e_j angle.r in RR$. If $v = v^i e_i$ and $w = w^i e_i$, with $v^i = alpha^i (v)$, $w^i = alpha^i (w)$ and the bilinearity, we can express $angle.l thick, thick angle.r$ in terms of the tensor product:
+  $
+    angle.l v, w angle.r &= v^i w^j angle.l e_i, e_j angle.r \
+    &= alpha^i (v) alpha^j (w) g_(i j) \
+    &= g_(i j) (alpha^i times.circle alpha^j) (v, w).
+  $
+  Hence, $angle.l thick, thick angle.r = g_(i j) (alpha^i times.circle alpha^j)$. This notation is often used to describe an inner product on $V$.
+]
+
+#proposition[
+  The tensor product is associative: $(f times.circle g) times.circle h = f times.circle (g times.circle h)$ for multilinear functions $f, g, h$ on $V$.
+]
+#proof[
+  For $f in L_k (V)$, $g in L_l (V)$, and $h in L_m (V)$, we have
+  $
+    [(f times.circle g) times.circle h](v_1, dots.c, v_(k+l+m)) &= (f times.circle g)(v_1, dots.c, v_(k+l)) h(v_(k+l+1), dots.c, v_(k+l+m)) \
+    &= f(v_1, dots.c, v_k) g(v_(k+1), dots.c, v_(k+l)) h(v_(k+l+1), dots.c, v_(k+l+m)) \
+    &= f(v_1, dots.c, v_k) (g times.circle h)(v_(k+1), dots.c, v_(k+l+m)) \
+    &= [f times.circle (g times.circle h)](v_1, dots.c, v_(k+l+m)),
+  $
+  which means $(f times.circle g) times.circle h = f times.circle (g times.circle h)$.
+]
+
+== The Wedge Product
+#definition[
+  For $f in A_k (V)$ and $g in A_l (V)$, the *wedge product* or *exterior product* of $f$ and $g$ is the $(k + l)$-linear function $f and g$ defined by
+  $
+    (f and g) = 1 / (k! l!) A(f times.circle g),
+  $
+  or explicitly,
+  $
+    (f and g)(v_1, dots.c, v_(k+l)) = 1 / (k! l!) sum_(sigma in S_(k+l)) ["sgn"(sigma)] f(v_sigma(1), dots.c, v_sigma(k)) g(v_sigma(k+1), dots.c, v_sigma(k+l))
+  $<WedgeExplicit>
+  By @symalt, the wedge product $f and g in A_(k+l) (V)$
+  When $k = 0$, the element $f in A_0(V)$ is a constant $c$, @WedgeExplicit gives
+  $
+    (c and g)(v_1, dots.c, v_(l)) &= 1 / (0! l!) sum_(sigma in S_(l)) ["sgn"(sigma)] c g(v_sigma(1), dots.c, v_sigma(l)) \
+    &= c / (l!) sum_(sigma in S_(l)) ["sgn"(sigma)] g(v_sigma(1), dots.c, v_sigma(l)) \
+    &= c g(v_1, dots.c, v_l),
+  $
+  which means $(c and g) = c g$, is a scalar multiplication.
+]
+#example[
+  For $f in A_2 (V)$ and $g in A_1 (V)$,
+  $
+    A(f times.circle g) &= f(v_1, v_2) g(v_3) - f(v_1, v_3) g(v_2) - f(v_2, v_1) g(v_3) \
+    &+ f(v_2, v_3) g(v_1) + f(v_3, v_1) g(v_2) - f(v_3, v_2) g(v_1),
+  $
+  where $f(v_1, v_2) g(v_3) = -f(v_2, v_1) g(v_3)$ and so on. \
+  Therefore, dividing by $2$, we have
+  $
+    (f and g)(v_1, v_2, v_3) = f(v_1, v_2) g(v_3) - f(v_1, v_3) g(v_2) + f(v_2, v_3) g(v_1).
+  $
+]
+One way to avoid redundancy in the definition of $f and g$ is to stipulate that in the sum @WedgeExplicit, $sigma(1), dots.c, sigma(k)$ be in ascending order and $sigma(k+1), dots.c, sigma(k+l)$ be in ascending order.
+#definition[
+  A permutation $sigma in S_(k+l)$ is called a $(k, l)$-*shuffle* if
+  $
+    sigma(1) lt dots.c lt sigma(k) "and" sigma(k+1) lt dots.c lt sigma(k+l).
+  $
+]
+Then @WedgeExplicit can be rewritten asy
+$
+  (f and g)(v_1, dots.c, v_(k+l)) = sum_((k, l)-"shuffles" \ sigma) ["sgn"(sigma)] f(v_sigma(1), dots.c, v_sigma(k)) g(v_sigma(k+1), dots.c, v_sigma(k+l)),
+$
+which is a sum of $mat(k+l; k)$ terms, instead of $(k + l) !$ terms. \
+#example[
+  For $f, g in A_2 (V)$,
+  $
+    (f and g)(v_1, v_2, v_3, v_4) &= f(v_1, v_2) g(v_3, v_4) - f(v_1, v_3) g(v_2, v_4) + f(v_1, v_4) g(v_2, v_3) \
+    &+ f(v_2, v_3) g(v_1, v_4) - f(v_2, v_4) g(v_1, v_3) + f(v_3, v_4) g(v_1, v_2) \
+  $
+]
+
+== Anticommutative of the Wedge Product
+#proposition[
+  The wedge product is *anticommutative*: if $f in A_k (V)$ and $g in A_l (V)$, then
+  $
+    f and g = (-1)^(k l) g and f.
+  $
+]
+#proof[
+  Define $tau in S_(k + l)$ to be the permutation
+  $
+    tau = mat(1, dots.c, l, l + 1, dots.c, l + k; k + 1, dots.c, k + l, 1, dots.c, k; delim: "[").
+  $
+  Then
+  $
+    sigma(1) &= sigma tau (l + 1), dots.c, sigma(k) = sigma tau (l +k), \
+    sigma(k + 1) &= sigma tau (1), dots.c, sigma(k + l) = sigma tau (l).
+  $
+  For any $v_1, dots.c, v_(k + l) in V$, we have
+  $
+    A(f times.circle g)(v_1, dots.c, v_(k + l)) &= sum_(sigma in S_(k + l)) ["sgn"(sigma)] f(v_sigma(1), dots.c, v_sigma(k)) g(v_sigma(k + 1), dots.c, v_sigma(k + l)) \
+    &= sum_(sigma in S_(k + l)) ["sgn"(sigma)] f(v_(sigma tau(l + 1)), dots.c, v_(sigma tau(l + k))) g(v_(sigma tau(1)), dots.c, v_(sigma tau(l))) \
+    &= "sgn"(tau) sum_(sigma in S_(k + l)) ["sgn"(sigma tau)] g(v_(sigma tau(1)), dots.c, v_(sigma tau(l))) f(v_(sigma tau(l + 1)), dots.c, v_(sigma tau(l + k))) \
+    &= "sgn"(tau) A(g times.circle f)(v_1, dots.c, v_(k + l)),
+  $
+  which means
+  $
+    A(f times.circle g) = ["sgn"(tau)] A(g times.circle f).
+  $
+  Dividing by $k! l!$, we have
+  $
+    (f and g) = ["sgn"(tau)] (g and f).
+  $
+  For every $i in [k + 1, k + l], j in [1, k]$, $(i, j)$ is an inversion of $tau$, so $["sgn"(tau)] = (-1)^(k l)$, and therefore
+  $
+    f and g = (-1)^(k l) g and f.
+  $
+]
+#corollary[
+  If $f in A_k (V)$ with odd $k$, then $f and f = 0$.
+]
+#proof[
+  By the anticommutative property of the wedge product, we have
+  $
+    f and f = (-1)^(k^2) f and f = -f and f,
+  $
+  which implies that $f and f = 0$.
+]
+
+== Associativity of the Wedge Product
+#lemma[
+  Suppose $f in L_k (V)$ and $g in L_l (V)$, then
+  + $A(A(f) times.circle g) = k! A(f times.circle g)$,
+  + $A(f times.circle A(g)) = l! A(f times.circle g)$.
+]
+#proof[
+  + By definition,
+    $
+      A(A(f) times.circle g) &= sum_(sigma in S_(k + l)) ["sgn"(sigma)] sigma ([sum_(tau in S_k) ["sgn"(tau)] tau f] times.circle g) \
+      &= sum_(sigma in S_(k + l)) sum_(tau in S_k) ["sgn"(sigma)] ["sgn"(tau)] sigma tau f times.circle g.
+    $<lemma>
+    For each $mu in S_(k + l)$ and each $tau in S_k$, there is a unique $sigma = mu tau^(-1) in S_(k + l)$ such that $mu = sigma tau$. Then @lemma can be rewritten as
+    $
+      A(A(f) times.circle g) &= k! sum_(mu in S_(k + l)) ["sgn"(mu)] mu f times.circle g \
+      &= k! A(f times.circle g).
+    $
+  + It can be shown similarly that
+    $
+      A(f times.circle A(g)) = l! A(f times.circle g).
+    $
+]
+
+#proposition[
+  If $f in A_k (V), g in A_l (V)$ and $h in A_m (V)$, then
+  $
+    (f and g) and h = f and (g and h)
+  $
+]
+#proof[
+  By definition,
+  $
+    (f and g) and h &= 1 / ((k + l)! m!) A((f and g) times.circle h) \
+    &= 1 / ((k + l)! m!) 1 / (k! l!) A(A(f times.circle g) times.circle h) \
+    &= (k + l)! / ((k + l)! m! k! l!) A((f times.circle g) times.circle h) \
+    &= 1 / (k! l! m!) A((f times.circle g) times.circle h).
+  $
+  Similarly,
+  $
+    f and (g and h) &= 1 / (k! (l + m)!) 1 / (l! m!) A(f times.circle (g times.circle h)) \
+    &= 1 / (k! l! m!) A(f times.circle (g times.circle h)).
+  $
+  Since $(f times.circle g) times.circle h = f times.circle (g times.circle h)$, we have
+  $
+    (f and g) and h = f and (g and h).
+  $
+]
+By associativity, we can omit parentheses and simply write $f and g and h$.
+#corollary(label: <associativity>)[
+  For $f_i in A_(d_i) (V)$, 
+  $
+    f_1 and dots.c and f_r = 1 / ((d_1) ! dots.c (d_r) !) A(f_1 times.circle dots.c times.circle f_r).
+  $
+]
+
+#proposition(label: <determinant>)[
+  If $alpha^1, dots.c, alpha^k in V^or$ and $v_1, dots.c, v_k in V$, then
+  $
+    (alpha^1 and dots.c and alpha^k)(v_1, dots.c, v_k) = det[alpha^i (v_j)],
+  $
+  where $[alpha^i (v_j)]$ is the matrix whose $(i, j)$th entry is $alpha^i (v_j)$.
+]
+#proof[
+  By @associativity, we have
+  $
+    (alpha^1 and dots.c and alpha^k)(v_1, dots.c, v_k) &= A(alpha^1 times.circle dots.c times.circle alpha^k)(v_1, dots.c, v_k) \
+    &= sum_(sigma in S_k) ["sgn"(sigma)] alpha^1 (v_(sigma(1))) dots.c alpha^k (v_(sigma(k))) \
+    &= det[alpha^i (v_j)]
+  $
+]
+
+#definition[
+  An algebra $A$ over a field $K$ is said to be *graded* if it can be written as a direct sum $A = xor_(k=0)^infinity A^k$ over $K$ such that the multiplication map sends $A^k times A^l$ into $A^(k + l)$. The notation $A = xor_(k=0)^infinity A^k$ means that each nonzero element of $A$ can be written uniquely as a finite sum
+  $
+    a = a_i_1 + dots.c + a_i_m,
+  $
+  where $a_i_j eq.not 0 in A^(i_j)$. \
+  A graded algebra $A = xor_(k=0)^infinity A^k$ is called *anticommutative* or *graded commutative* if for all $a in A^k$ and $b in A^l$,
+  $
+    a b = (-1)^(k l) b a.
+  $
+  A *homomorphism* of graded algebras is an algebra homomorphism that preserves the degree.
+]
+
+#example[
+  The polynomial algebra $A = RR[x, y]$ is graded by degree; $A^k$ consists of all homogeneous polynomials of total degree $k$ in $x$ and $y$.
+]
+
+#definition[
+  For a finite-dimensional vector space $V$, say of dimension $n$, the *exterior algebra* or *Grassmann algebra* of multivectors on $V$ is the graded algebra
+  $
+    A_* (V) = xor.big_(k=0)^infinity A_k (V) = xor.big_(k=0)^n A_k (V),
+  $
+  with the wedge product as multiplication.
+]
+
+== A Basis for $k$-Covectors
+Let $e_1, dots.c, e_n$ be a basis for $V$ and $alpha^1, dots.c, alpha^n$ be the dual basis for $V^or$. Introduce the multi-index notation
+$
+  I = (i_1, dots.c, i_k) 
+$
+and write $e_I$ for $(e_(i_1), dots.c, e_(i_k))$ and $alpha^I$ for $(alpha^(i_1), dots.c, alpha^(i_k))$. \
+A $k$-linear function $f$ on $V$ is completely determined by its values on all $k$-tuples $(e_i_1, dots.c, e_i_k)$. If $f$ is alternating, then it is completely determined by its values on $(e_i_1, dots.c, e_i_k)$ with $1 lt.eq i_1 lt dots.c lt i_k lt.eq n$; that is, it suffices to consider $e_I$ with $I$ in strictly ascending order.
+
+#lemma[
+  Let $e_1, dots.c, e_n$ be a basis for $V$ and $alpha^1, dots.c, alpha^n$ be the dual basis for $V^or$. If $I = (1 lt.eq i_1 lt dots.c lt i_k lt.eq n)$ and $J = (1 lt.eq j_1 lt dots.c lt j_k lt.eq n)$ are two strictly ascending multi-indices of length $k$, then
+  $
+    alpha^I (e_J) = delta^I_J = cases(
+      1 &"for" I = J,
+      0 &"for" I eq.not J.
+    )
+  $
+]
+#proof[
+  By @determinant,
+  $
+    alpha^I (e_J) = det[alpha^i (e_j)]_(i in I, j in J).
+  $
+  If $I = J$, $[alpha^i (e_j)]$ is the identity matrix, so $alpha^I (e_J) = 1$. \
+  If $I eq.not J$, we compare them term by term until th terms differ:
+  $
+    i_1 = j_1, dots.c, i_(l-1) = j_(l-1), i_l eq.not j_l, dots.c .
+  $
+  Without loss of generality, we can assume $i_l < j_l$. Then $i_l eq.not j_1, dots.c, j_(l-1)$, and $i_l eq.not j_(l+1), dots.c, j_k$, so the $l$-th row of $[alpha^i (e_j)]$ will be all zeros. Thus, $alpha^I (e_J)=0.$
+]
+
+#proposition[
+  The alternating $k$-linear function $alpha^I, I = (i_1 lt dots.c lt i_k)$, form a basis for $A_k (V)$.
+]
+#proof[
+  To show linear independence, suppose $c_I alpha^I = 0$ for some $c_I in RR$. Applying both sides to $e_J$ gives
+  $
+    0 &= c_I alpha^I (e_J) \
+    &= c_I delta^I_J \
+    &= c_J,
+  $
+  which means $c_J = 0$ for all $J$, so $alpha^I$ are linearly independent. \
+  To show that they span $A_k (V)$, let $f in A_k (V)$ and $g = f(e_I) alpha^I$. Then
+  $
+    g(e_J) &= f(e_I) alpha^I (e_J) \
+    &= f(e_I) delta^I_J \
+    &= f(e_J),
+  $
+  which means $f = g = f(e_I) alpha^I$, so $f$ is a linear combination of $alpha^I$. Thus, $alpha^I$ span $A_k (V)$.
+]
+
+#corollary[
+  If $V$ is $n$-dimensional, then the dimension of $A_k (V)$ is $mat(n; k)$.
+]
+
+#corollary[
+  If $k gt dim V$, then $A_k (V) = 0$.
+]
+
+= Differential Forms on $RR^n$

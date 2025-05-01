@@ -80,7 +80,7 @@ $
 #prob[
   Show that the map
   $ 
-    f: ]-pi/2, pi/2[n -> RR^n, f(x_1, ..., x_n) = (tan x_1, ..., tan x_n), 
+    f: ]-pi/2, pi/2[n -> RR^n, f(x_1, dots.c, x_n) = (tan x_1, dots.c, tan x_n), 
   $
   is a diffeomorphism.
 ]
@@ -234,3 +234,191 @@ $
   Thus, $D_1 compose D_2 - D_2 compose D_1$ satisfies the Leibniz rule and is a derivation.
 ]
 
+#section[The Exterior Algebra of Multivectors]
+
+#prob[
+  Let $e_1, dots.c, e_n$ be a basis for a vector space $V$ and let $alpha^1, dots.c, alpha^n$ be its dual basis in $V^V$. Suppose $[g_(i j)] in RR^(n times n)$ is an $n times n$ matrix. Define a bilinear function $f: V times V -> RR$ by
+  $ 
+    f(v, w) = g_(i j) v^i w^j 
+  $
+  for $v = v^i e_i$ and $w = w^j e_j$ in $V$. Describe $f$ in terms of the tensor products of $alpha^i$ and $alpha^j$, $1 <= i,j <= n$.
+]
+#sol[
+  Since $v^i = alpha^i (v)$ and $w^j = alpha^j (w)$, we can express $f$ as follows:
+  $
+    f(v, w) &= g_(i j) v^i w^j \
+    &= g_(i j) alpha^i (v) alpha^j (w) \
+    &= g_(i j) (alpha^i times.circle alpha^j)(v, w),
+  $
+  then $f = g_(i j) (alpha^i times.circle alpha^j)$.
+]
+
+#prob[
+  Let $V$ be a vector space of dimension $n$ and $f: V -> RR$ a nonzero linear functional.
+  + Show that $dim ker f = n - 1$. A linear subspace of $V$ of dimension $n - 1$ is called a _hyperplane_ in $V$.
+  + Show that a nonzero linear functional on a vector space $V$ is determined up to a multiplicative constant by its kernel, a hyperplane in $V$. In other words, if $f$ and $g: V -> RR$ are nonzero linear functionals and $ker f = ker g$, then $g = c f$ for some constant $c in RR$.
+]
+#sol[
+  + $
+      dim ker f &= dim V - dim im f \
+      &= n - 1.
+    $
+  + Let $f, g: V arrow.r RR$ be nonzero linear functionals with $ker f = ker g$. As $f$ is nonzero, there exists $v'_0 in V$ such that $f(v'_0) = b eq.not 0$. Let $v_0 = v'_0 / b$, $f(v_0) = f(v'_0 / b) = 1 / b f(v'_0) = 1$. As $ker f = ker g$ and $f(v_0) eq.not 0$, we have $g(v_0) eq.not 0$. Then, let $v in V, f(v) = a$, and $w = v - a v_0$. As $f$ is linear,
+  $
+    f(w) &= f(v - a v_0) \
+    &= f(v) - a f(v_0) \
+    &= a - a \
+    &= 0,
+  $
+  which means $w in ker f$, and thus $w in ker g$. Then,
+  $
+    0 &= g(w) \
+    &= g(v - a v_0) \
+    &= g(v) - a g(v_0) \
+    &= g(v) - f(v) g(v_0).
+  $
+  Therefore we have that $g(v) = c f(v)$, where $c = g(v_0)$.
+]
+
+#prob[
+  Let $V$ be a vector space of dimension $n$ with basis $e_1, dots.c, e_n$. Let $alpha^1, dots.c, alpha^n$ be the dual basis for $V^or$. Show that a basis for the space $L_k (V)$ of $k$-linear functions on $V$ is ${alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)}$ for all multi-indices $(i_1, dots.c, i_k)$ (not just the strictly ascending multi-indices as for $A_k (L)$). In particular, this shows that $dim L_k (V) = n^k$.
+]
+
+#sol[
+  + Let $T in L_k (V)$ and $T(e_i_1, dots.c, e_i_k) = T_(i_1, dots.c, i_k)$, For the function
+    $
+      T' = T_(i_1, dots.c, i_k) alpha^(i_1) times.circle dots.c times.circle alpha^(i_k),
+    $
+    we have
+    $
+      T'(e_j_1, dots.c, e_j_k) &= T_(i_1, dots.c, i_k) alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)(e_j_1, dots.c, e_j_k) \
+      &= T_(i_1, dots.c, i_k) alpha^(i_1)(e_j_1) dots.c alpha^(i_k)(e_j_k) \
+      &= T_(i_1, dots.c, i_k) delta^(i_1)_(j_1) dots.c delta^(i_k)_(j_k) \
+      &= T_(j_1, dots.c, j_k) \
+      &= T(e_j_1, dots.c, e_j_k),
+    $
+    which means $T = T'$. Therefore, ${alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)}$ spans $L_k (V)$. \
+  + Suppose $T = 0$, then
+    $
+      0 &= T(e_j_1, dots.c, e_j_k) \
+      &= T_(i_1, dots.c, i_k) alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)(e_j_1, dots.c, e_j_k) \
+      &= T_(i_1, dots.c, i_k) alpha^(i_1)(e_j_1) dots.c alpha^(i_k)(e_j_k) \
+      &= T_(i_1, dots.c, i_k) delta^(i_1)_(j_1) dots.c delta^(i_k)_(j_k) \
+      &= T_(j_1, dots.c, j_k),
+    $
+    which means $T_(i_1, dots.c, i_k) = 0$ for all $j_1, dots.c, j_k$. Therefore ${alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)}$ is linearly independent. \
+  Thus, ${alpha^(i_1) times.circle dots.c times.circle alpha^(i_k)}$ is a basis for $L_k (V)$.
+]
+
+#prob[
+  Let $f$ be a $k$-tensor on a vector space $V$. Prove that $f$ is alternating if and only if $f$ changes sign whenever two successive arguments are interchanged:
+  $f(dots.c, v_(i+1), v_i, dots.c) = -f(dots.c, v_i, v_(i+1), dots.c)$
+  for $i = 1, dots.c, k-1$.
+]
+#sol[
+  + If $f$ is alternating, then for $sigma = (i, i+1)$,
+    $
+      f(dots.c, v_(i+1), v_i, dots.c) &= f(sigma(v_1), dots.c, sigma(v_k)) \
+      &= "sgn"(sigma) f(v_1, dots.c, v_k) \
+      &= -f(dots.c, v_i, v_(i+1), dots.c),
+    $
+    which means $f(dots.c, v_(i+1), v_i, dots.c) = -f(dots.c, v_i, v_(i+1), dots.c)$.
+  + If $f(dots.c, v_(i+1), v_i, dots.c) = -f(dots.c, v_i, v_(i+1), dots.c)$, then for $sigma = (i, i+1)$,
+    $
+      f(sigma(v_1), dots.c, sigma(v_k)) &= f(dots.c, v_(i+1), v_i, dots.c) \
+      &= -f(dots.c, v_i, v_(i+1), dots.c) \
+      &= "sgn"(sigma) f(v_1, dots.c, v_k),
+    $
+    which means $f$ is alternating.
+]
+
+#prob[
+  Let $f$ be a $k$-tensor on a vector space $V$. Prove that $f$ is alternating if and only if $f(v_1, dots.c, v_k) = 0$ whenever two of the vectors $v_1, dots.c, v_k$ are equal.
+]
+#sol[
+  + If $f$ is alternating, and $v_i = v_j$, then for $sigma = (i, j)$,
+    $
+      f(dots.c, sigma(v_i), dots.c, sigma(v_j), dots.c) &= f(dots.c, v_j, dots.c, v_i, dots.c) \
+      &= "sgn"(sigma) f(v_1, dots.c, v_k) \
+      &= -f(dots.c, v_i, dots.c, v_j, dots.c),
+    $
+    which means $f(v_1, dots.c, v_k) = 0$.
+  + If $f(v_1, dots.c, v_k) = 0$ for $v_i = v_j$, then for $sigma = (i, j)$,
+    $
+      0 &= f(dots.c, v_j, dots.c, v_i, dots.c) \
+      &= - f(dots.c, v_i, dots.c, v_j, dots.c) \
+      &= "sgn"(sigma) f(v_1, dots.c, v_k) \
+      &= f(sigma(v_1), dots.c, sigma(v_k)) \
+    $
+    which means $f$ is alternating.
+]
+
+#prob[
+  Let $V$ be a vector space. For $a, b in RR$, $f in A_k (V)$, and $g in A_l (V)$, show that $a f and b g = (a b) f and g$.
+]
+#sol[
+  $
+    a f and b g &= 1 / (k! l!) A(a f times.circle b g) \
+    &= 1 / (k! l!) sum_(sigma in S_(k+l)) "sgn"(sigma) sigma(a f(v_1, dots.c, v_k) b g(v_(k+1), dots.c, v_(k+l))) \
+    &= (a b) / (k! l!) sum_(sigma in S_(k+l)) "sgn"(sigma) sigma(f(v_1, dots.c, v_k) g(v_(k+1), dots.c, v_(k+l))) \
+    &= (a b) / (k! l!) A(f times.circle g) \
+    &= (a b) f and g,
+  $
+]
+
+#prob[
+  Suppose two sets of covectors on a vector space $V$, $beta^1, dots.c, beta^k$ and $gamma^1, dots.c, gamma^k$, are related by
+  $ 
+    beta^i = a_j^i gamma^j, quad i = 1, dots.c, k, 
+  $
+  for a $k times k$ matrix $A = [a_j^i]$. Show that
+  $ 
+    beta^1 and dots.c and beta^k = (det A) gamma^1 and dots.c and gamma^k. 
+  $
+]
+#sol[
+  $
+    beta^1 and dots.c and beta^k &= (a^1_j_1 gamma^(j_1)) and dots.c and (a^k_j_k gamma^(j_k)) \
+    &= a^1_j_1 dots.c a^k_j_k (gamma^(j_1) and dots.c and gamma^(j_k)) \
+    &= a^1_sigma(1) dots.c a^k_sigma(k) ("sgn" sigma) (gamma^1 and dots.c and gamma^k) \
+    &= (det A) (gamma^1 and dots.c and gamma^k).
+  $
+]
+
+#prob[
+  Let $f$ be a $k$-covector on a vector space $V$. Suppose two sets of vectors $u_1, dots.c, u_k$ and $v_1, dots.c, v_k$ in $V$ are related by
+  $ 
+    u_j = a_j^i v_i, quad j = 1, dots.c, k, 
+  $
+  for a $k times k$ matrix $A = [a_j^i]$. Show that
+  $ 
+    f(u_1, dots.c, u_k) = (det A) f(v_1, dots.c, v_k). 
+  $
+]
+#sol[
+  $
+    f(u_1, dots.c, u_k) &= f(a_1^(i_1) v_i_1, dots.c, a_k^(i_k) v_i_k) \
+    &= a_1^(i_1) dots.c a_k^(i_k) f(v_i_1, dots.c, v_i_k) \
+    &= a_1^(sigma(1)) dots.c a_k^(sigma(k)) ("sgn" sigma) f(v_1, dots.c, v_k) \
+    &= (det A) f(v_1, dots.c, v_k).
+  $
+]
+
+#prob[
+  Let $V$ be a vector space of dimension $n$. Prove that if an $n$-covector $omega$ vanishes on a basis $e_1, dots.c, e_n$ for $V$, then $omega$ is the zero covector on $V$.
+]
+#sol[
+  Let ${e_1, dots.c, e_n}$ be a basis for $V$, for $v_i = v_i^j e_j$ in $V$, we have
+  $
+    omega(v_1, dots.c, v_n) &= det[v_i^j] omega(e_1, dots.c, e_n) \
+    &= 0.
+  $
+]
+
+#prob[
+  Let $alpha^1, dots.c, alpha^k$ be 1-covectors on a vector space $V$. Show that $alpha^1 and dots.c and alpha^k != 0$ if and only if $alpha^1, dots.c, alpha^k$ are linearly independent in the dual space $V^V$.
+]
+
+#prob[
+  Let $alpha$ be a nonzero 1-covector and $gamma$ a $k$-covector on a finite-dimensional vector space $V$. Show that $alpha and gamma = 0$ if and only if $gamma = alpha and beta$ for some $(k - 1)$-covector $beta$ on $V$.
+]
