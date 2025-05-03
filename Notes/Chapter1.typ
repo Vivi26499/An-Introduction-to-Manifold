@@ -684,12 +684,12 @@ By associativity, we can omit parentheses and simply write $f and g and h$.
 ]
 
 #definition[
-  An algebra $A$ over a field $K$ is said to be *graded* if it can be written as a direct sum $A = xor_(k=0)^infinity A^k$ over $K$ such that the multiplication map sends $A^k times A^l$ into $A^(k + l)$. The notation $A = xor_(k=0)^infinity A^k$ means that each nonzero element of $A$ can be written uniquely as a finite sum
+  An algebra $A$ over a field $K$ is said to be *graded* if it can be written as a direct sum $A = xor.big_(k=0)^infinity A^k$ over $K$ such that the multiplication map sends $A^k times A^l$ into $A^(k + l)$. The notation $A = xor.big_(k=0)^infinity A^k$ means that each nonzero element of $A$ can be written uniquely as a finite sum
   $
     a = a_i_1 + dots.c + a_i_m,
   $
   where $a_i_j eq.not 0 in A^(i_j)$. \
-  A graded algebra $A = xor_(k=0)^infinity A^k$ is called *anticommutative* or *graded commutative* if for all $a in A^k$ and $b in A^l$,
+  A graded algebra $A = xor.big_(k=0)^infinity A^k$ is called *anticommutative* or *graded commutative* if for all $a in A^k$ and $b in A^l$,
   $
     a b = (-1)^(k l) b a.
   $
@@ -738,7 +738,7 @@ A $k$-linear function $f$ on $V$ is completely determined by its values on all $
   Without loss of generality, we can assume $i_l < j_l$. Then $i_l eq.not j_1, dots.c, j_(l-1)$, and $i_l eq.not j_(l+1), dots.c, j_k$, so the $l$-th row of $[alpha^i (e_j)]$ will be all zeros. Thus, $alpha^I (e_J)=0.$
 ]
 
-#proposition[
+#proposition(label: <AlternatingBasis>)[
   The alternating $k$-linear function $alpha^I, I = (i_1 lt dots.c lt i_k)$, form a basis for $A_k (V)$.
 ]
 #proof[
@@ -767,3 +767,370 @@ A $k$-linear function $f$ on $V$ is completely determined by its values on all $
 ]
 
 = Differential Forms on $RR^n$
+Differential forms extend Grassmann's exterior algebra from the tangent space at a point to an entire manifold. \
+In this section, we will study differential forms on an open set of $RR^n$. 
+
+== Differential $1$-forms and the Differential of a Function
+#definition[
+  The *cotangent space* to $RR^n$ at $p$, denoted by $T^*_p (RR^n)$, is defined to be the dual space $(T_p RR^n)^or$ of the tangent space $T_p RR^n$.
+]
+
+#definition[
+  In parallel with the definition of a vector field, a *covector field* or a *differential $1$-form* on an open set $U subset RR^n$ is a function $omega$ that assigns to each point $p in U$ a covector $omega_p in T^*_p (RR^n)$,
+  $
+    omega: U &arrow.r union.big_(p in U) T^*_p (RR^n), \
+    p &arrow.r omega_p in T^*_p (RR^n).
+  $
+  Note that in the union $union.big_(p in U) T^*_p (RR^n)$, the sets $T^*_p (RR^n)$ are disjoint. We call a differential $1$-form a *$1$-form* for short.
+]
+
+#definition[
+  For any $f in C^infinity (U)$, the *differential* of $f$ is the $1$-form $dif f$ defined, for $p in U$ and $X_p in T_p U$, by
+  $
+    (dif f)_p (X_p) = X_p f.
+  $
+]
+
+The directional derivative sets a bilinear pairing
+$
+  T_p (RR^n) times C_p^infinity (RR^n) &arrow.r RR, \
+  (X_p, f) &arrow.r.bar angle.l X_p, f angle.r = X_p f.
+$
+One may think of a tangent vector as a function on the second argument of the pairing: $angle.l X_p, dot angle.r$, then the differential can be thought of as a function on the first argument of the pairing:
+$
+  (dif f)_p = angle.l dot, f angle.r,
+$
+which is also written as $dif f |_p$.
+
+#proposition(label: <basis>)[
+  If ${x^1, dots.c, x^n}$ are the coordinates of $RR^n$, then at each point $p in RR^n$, ${(dif x^1)_p, dots.c, (dif x^n)_p}$ is the basis for $T^*_p (RR^n)$ dual to the basis ${lr(diff / (diff x^1) |)_p, dots.c, lr(diff / (diff x^n) |)_p}$ of $T_p (RR^n)$. 
+]
+#proof[
+  By definition,
+  $
+    (dif x^i)_p (lr(diff / (diff x^j) |)_p) &= lr(diff / (diff x^j) |)_p x^i \
+    &= lr((diff x^i) / (diff x^j) |)_p \
+    &= delta^i_j.
+  $
+]
+
+If $omega$ is a $1$-form on an open set $U subset RR^n$, then by @basis, at each point $p in U$, $omega$ can be expressed as
+$
+  omega_p = omega_i (p) (dif x^i)_p,
+$
+for some $omega_i (p) in RR$. As $p$ varies over $U$, the coefficients $omega_i$ become functions on $U$. Thus, we can write
+$
+  omega = omega_i dif x^i.
+$
+A covector field $omega$ is said to be $C^infinity$ on $U$ if the coefficients $omega_i$ are all $C^infinity$ functions on $U$.
+
+#proposition(label: <differential>)[
+  If $f in C^infinity (U)$, then
+  $
+    dif f = (diff f) / (diff x^i) dif x^i.
+  $
+]
+#proof[
+  By @basis, we have
+  $
+    dif f &= (dif f)_i dif x^i,
+  $
+  applying both sides to $diff / (diff x^j)$ gives
+  $
+    dif f (diff / (diff x^j)) &= (dif f)_i (dif x^i) (diff / (diff x^j)) \
+    &= (dif f)_i (diff x^i) / (diff x^j) \
+    &= (dif f)_i delta^i_j \
+    &= (dif f)_j.
+  $
+  Therefore, we have
+  $
+    dif f &= dif f (diff / (diff x^j)) dif x^j \
+    &= (diff f) / (diff x^j) dif x^j \
+  $
+]
+This also shows that if $f$ is a $C^infinity$ function on $U$, then $dif f$ is a $C^infinity$ $1$-form on $U$.
+
+== Differential $k$-Forms
+#definition[
+  Generally, a *differential form $omega$ of degree $k$* or *$k$-form* on an open set $U subset RR^n$ is a function that assigns to each point $p in U$ an alternating $k$-linear function $omega_p in A_k (T_p RR^n)$.
+]
+
+By @AlternatingBasis, a basis for $A_k (T_p RR^n)$ is
+$
+  dif x^I_p = dif x^(i_1)_p and dots.c and dif x^(i_k)_p, quad 1 lt.eq i_1 lt dots.c lt i_k lt.eq n.
+$
+Therefore, at each point $p in U$, $omega_p$ is a linear combination
+$
+  omega_p = omega_I (p) dif x^I_p, quad 1 lt.eq i_1 lt dots.c lt i_k lt.eq n, 
+$
+and a $k$-form $omega$ on $U$ can be expressed as
+$
+  omega = omega_I dif x^I,   
+$
+with function coefficients $omega_I: U arrow.r RR$. We say that a $k$-form $omega$ is $C^infinity$ on $U$ if the coefficients $omega_I in C^infinity (U)$. \
+Denote by $Omega^k (U)$ the vector space of all $C^infinity$ $k$-forms on $U$. A $0$-form assigns to each point $p in U$ an element of $A_0(T_p RR^n) = RR$. Thus a $0$-form is simply a $C^infinity$ function on $U$, so $Omega^0 (U) = C^infinity (U)$. \
+There are no nonzero $k$-forms on $RR^n$ for $k gt n$. This is because when $k gt n$, in $dif x^I$ at least two of the $1$-forms $dif x^(i_alpha)$ will be the same, forcing $dif x^I = 0$. \
+#definition[
+  The *wedge product* of a $k$ form $omega$ and an $l$-form $tau$ on an open set $U$ is defined pointwise:
+  $
+    (omega and tau)_p = omega_p and tau_p in A_(k + l) (T_p RR^n).
+  $
+  In terms of coordinates, if $omega = omega_I dif x^I$ and $tau = tau_J dif x^J$, then
+  $
+    omega and tau = omega_I tau_J dif x^I and dif x^J,
+  $
+  where if $I$ and $J$ are not disjoint, then $dif x^I and dif x^J = 0$. Hence, the sum is actually over disjoint $I$ and $J$. \
+  This also shows that the wedge product of two $C^infinity$ forms is $C^infinity$. So the wedge product is a bilinear map
+  $
+    and: Omega^k (U) times Omega^l (U) &arrow.r Omega^(k + l) (U),
+  $
+  which is associative and anticommutative.
+]
+
+In case one of the factors has degree $0$, say $k = 0$, the wedge product
+$
+  and: Omega^0 (U) times Omega^l (U) &arrow.r Omega^l (U)
+$
+is the pointwise multiplication of a $C^infinity$ $l$-form by a $C^infinity$ function:
+$
+  (f and tau)_p = f(p) and tau_p = f(p) tau_p.
+$
+
+#example[
+  Let $x, y, z$ be the coordinates on $RR^3$. The $C^infinity$ $1$-form on $RR^3$ is given by
+  $
+    f dif x + g dif y + h dif z,
+  $
+  where $f, g, h in C^infinity (RR^3)$ are functions. The $C^infinity$ $2$-form is given by
+  $
+    f dif y and dif z + g dif x and dif z + h dif x and dif y,
+  $
+  and the $C^infinity$ $3$-form is given by
+  $
+    f dif x and dif y and dif z.
+  $
+]
+
+#example[
+  Let $x^1, x^2, x^3, x^4$ be the coordinates on $RR^4$ and $p$ a point in $RR^4$. A basis for $A_3 (T_p RR^4)$ is
+  $
+    {
+      dif x^1_p and dif x^2_p and dif x^3_p, \
+      dif x^1_p and dif x^2_p and dif x^4_p, \
+      dif x^1_p and dif x^3_p and dif x^4_p, \
+      dif x^2_p and dif x^3_p and dif x^4_p
+    }
+  $
+]
+
+With the wedge product as multiplication and the degree of a form as the grading, the direct sum $Omega^* (U) = xor.big_(k=0)^n Omega^k (U)$ becomes an anticommutative graded algebra over $RR$. Since one can multiply $C^infinity$ $k$-forms by $C^infinity$ functions, the set $Omega^k (U)$ of $C^infinity$ $k$-forms on $U$ is both a vector space over $RR$ and a module over $C^infinity (U)$, then $Omega^* (U) = xor.big_(k=0)^n Omega^k (U)$ is also a module over $C^infinity (U)$.
+
+== Differential Forms as Multilinear Functions on Vector Fields
+
+For $omega in Omega^1 (U)$ and $X in frak(X) (U)$, we define a function $omega (X)$ on $U$ by
+$
+  omega (X) (p) = omega_p (X_p),
+$
+or written in coordinates,
+$
+  omega = omega_i dif x^i, quad X = X^i diff / (diff x^i), "for" omega_i, X^i in C^infinity (U),
+$
+So,
+$
+  omega (X) &= omega_i dif x^i (X^j diff / (diff x^j)) \ 
+  &= omega_i X^j (diff x^i) / (diff x^j) \
+  &= omega_i X^j delta^i_j \
+  &= omega_i X^i,
+$
+which is $C^infinity$ on $U$. Thus, a $C^infinity$ $1$-form on $U$ gives eise to a map from $frak(X) (U)$ to $C^infinity (U)$. \
+#proposition[
+  The map $omega$ is linear over the ring $C^infinity (U)$: for $f in C^infinity (U)$,
+  $
+    omega (f X) = f omega (X).
+  $
+]
+#proof[
+  By definition,
+  $
+    (omega (f X))_p &= omega_p ((f X)_p) \
+    &= omega_p (f(p) X_p) \
+    &= f(p) omega_p (X_p) \
+    &= (f omega (X))_p.
+  $
+]
+
+Let $cal(F) (U) = C^infinity (U)$, a $1$-form $omega$ on $U$ gives rise to an $cal(F) (U)$-linear map $frak(X) (U) arrow.r C^infinity (U)$. Similarly, a $k$-form $omega$ on $U$ gives rise to a $k$-linear map over $cal(F) (U)$,
+$
+  frak(X) (U) times dots.c times frak(X) (U) &arrow.r cal(F) (U), \
+  (X_1, dots.c, X_k) &arrow.r.bar omega (X_1, dots.c, X_k).
+$
+
+#example[
+  Let $omega in Omega^2 (RR^3)$ and $tau in Omega^1 (RR^3)$. If $X, Y, Z in frak(X) (M)$, then
+  $
+    (omega and tau) (X, Y, Z) &= omega (X, Y) tau (Z) + omega (Y, Z) tau (X) - omega (X, Z) tau (Y) \
+  $
+]
+
+== The Exterior Derivative
+#definition[
+  + The *exterior derivative* of $f in Omega^0 (U) = C^infinity (U)$ is the $1$-form $dif f$ defined, by @differential, by
+    $
+      dif f = (diff f) / (diff x^i) dif x^i.
+    $
+  + For $k gt.eq 1$, if $omega = omega_I dif x^I in Omega^k (U)$, the *exterior derivative* of $omega$ is the $(k + 1)$-form $dif omega$ defined by
+  $
+    dif omega &= dif omega_I dif x^I \
+    &= ((diff omega_I) / (diff x^i) dif x^i) and dif x^I in Omega^(k + 1) (U)
+  $
+]
+
+#example[
+  Let $omega = f dif x + g dif y in RR^2$, where $f, g in C^infinity (RR^2)$. With simplified notation, $f_x = (diff f) / (diff x)$, then
+  $
+    dif omega &= dif f and dif x + dif g and dif y \
+    &= (f_x dif x + f_y dif y) and dif x + (g_x dif x + g_y dif y) and dif y \
+    &= (g_x - f_y) dif x and dif y
+  $
+]
+
+#definition[
+  Let $A = xor.big_(k=0)^infinity A^k$ be a graded algebra over a field $K$. An *antiderivation* of the graded algebra $A$ is a $K$-linear map $D: A &arrow.r A$ such that for $a in A^k$ and $b in A^l$,
+  $
+    D(a b) = (D a)b + (-1)^(k) a D b.
+  $
+  If there is an integer $m$ such that the antiderivation $D$ sends $A^k$ to $A^(k + m)$ for all $k$, then we say that it is an antiderivation of *degree $m$*. By defining $A_k = 0$ for $k lt 0$, the grading of the graded algebra $A$ can be extended to negative integers, and the degree $m$ of an antiderivation $D$ can be negative. (An example of an antiderivation of degree $-1$ is interior multiplication.)
+]
+
+#proposition(label: <ExteriorDifferentiation>)[
+  + The *exterior differentiation* $dif: Omega^* (U) &arrow.r Omega^* (U)$ is an antiderivation of degree $1$:
+    $
+      dif (omega and tau) = (dif omega) and tau + (-1)^(deg omega) omega and (dif tau).
+    $
+  + $dif^2 = 0$.
+  + If $f in C^infinity (U)$ and $X in frak(X) (U)$, then
+    $
+      (dif f) (X) = X f.
+    $
+]
+#proof[
+  + For $omega = omega_I dif x^I$ and $tau = tau_J dif x^J$, we have
+    $
+      dif (omega and tau) &= dif (omega_I tau_J dif x^I and dif x^J) \
+      &= (diff (omega_I tau_J)) / (diff x^i) dif x^i and dif x^I and dif x^J \
+      &= (diff omega_I) / (diff x^i) tau_J dif x^i and dif x^I and dif x^J  + omega_I (diff tau_J) / (diff x^i) dif x^i and dif x^I and dif x^J \
+      &= (diff omega_I) / (diff x^i) dif x^i and dif x^I and tau_J dif x^J + (-1)^(deg omega) omega_I dif x^I and (diff tau_J) / (diff x^i) dif x^i and dif x^J \
+      &= (dif omega) and tau + (-1)^(deg omega) omega and (dif tau).
+    $
+  + For $omega = omega_I dif x^I$, we have
+    $
+      dif^2 omega &= dif (dif omega) \
+      &= dif ((diff omega_I) / (diff x^i) dif x^i and dif x^I) \
+      &= (diff^2 omega_I) / (diff x^j diff x^i) dif x^j and dif x^i and dif x^I,
+    $
+    where if $i = j$, then $dif x^j and dif x^i = 0$; if $i eq.not j$, then $(diff omega_I) / (diff x^j diff x^i)  = (diff omega_I) / (diff x^i diff x^j)$, so
+    $
+      dif^2 omega &= (diff^2 omega_I) / (diff x^j diff x^i) dif x^j and dif x^i and dif x^I \
+      &= (diff^2 omega_I) / (diff x^i diff x^j) dif x^i and dif x^j and dif x^I \
+      &= -(diff^2 omega_I) / (diff x^j diff x^i) dif x^j and dif x^i and dif x^I,
+    $
+    which means $dif^2 omega = 0$.
+  + This is just the definition of $X f$.
+]
+
+#proposition[
+  @ExteriorDifferentiation uniquely characterizes exterior differentiation on an open set $U subset RR^n$, i.e., if $D: Omega^* (U) arrow.r Omega^* (U)$ satisfies @ExteriorDifferentiation, then $D = dif$.
+]
+#proof[
+  From @ExteriorDifferentiation (ii), $D dif x^i = D D x^i = 0$, then
+  $
+    D (dif x^I) = D (dif x^(i_1) and dots.c and dif x^(i_k)) = 0.
+  $
+  Finally, for $omega = f dif x^I$,
+  $
+    D (omega) &= D (f dif x^I) \
+    &= (D f) and dif x^I + f D (dif x^I) \
+    &= (dif f) and dif x^I \
+    &= dif (f dif x^I) \
+    &= dif omega,
+  $
+  which means $D = dif$ on $Omega^* (U)$.
+]
+
+== Closed Forms and Exact Forms
+#definition[
+  A $k$-form $omega$ is said to be *closed* if $dif omega = 0$, and *exact* if there exists a $(k - 1)$-form $tau$ such that $omega = dif tau$. Since $dif(dif tau) = 0$, every exact form is closed.
+]
+
+#example[
+  The $1$-form $omega = 1 / (x^2 + y^2) (-y dif x + x dif y)$ on $RR^2 - {(0, 0)}$ is closed:
+  $
+    dif omega &= diff / (diff y) (- y / (x^2 + y^2)) dif y and dif x + diff / (diff x) (x / (x^2 + y^2)) dif x and dif y \
+    &= ((x^2 + y^2 - 2x^2) / (x^2 + y^2)^2 + (x^2 + y^2 - 2y^2) / (x^2 + y^2)^2) dif x and dif y \
+    &= 0.
+  $
+]
+
+#definition[
+  A collection of vector spaces ${V^k}_(k=0)^infinity$ with linear maps $d_k: V^k arrow.r V^(k + 1)$ such that $d_(k+1) thick circle.small thick d_k = 0$ is called a *differential complex* or a *cochain complex*. For any open set $U subset RR^n$, the exterior derivative $d$ makes $Omega^* (U)$ into a differential complex, called the *de Rham complex* of $U$:
+  $
+    0 arrow.r Omega^0 (U) arrow.r^dif Omega^1 (U) arrow.r^dif Omega^2 (U) arrow.r^dif dots.c.
+  $
+  The closed forms are the elements of the kernel of $d$ and the exact forms are the elements of the image of $d$. 
+]
+
+== Applications to Vector calculus
+A $1$-form with vector fields on $U$ can be identified via
+$
+  P dif x + Q dif y + R dif z arrow.l.r.long mat(P; Q; R; delim: "[").
+$
+A $2$-form with vector fields on $U$ can be identified via
+$
+  P dif y and dif z + Q dif z and dif x + R dif x and dif y arrow.l.r.long mat(P; Q; R; delim: "[").
+$
+A $3$-form with vector fields on $U$ can be identified via
+$
+  f dif x and dif y and dif z arrow.l.r.long f.
+$
+In terms of these identifications, the exterior derivative of a $0$-form is
+$
+  dif f = (diff f) / (diff x) dif x + (diff f) / (diff y) dif y + (diff f) / (diff z) dif z arrow.l.r.long mat((diff f) / (diff x); (diff f) / (diff y); (diff f) / (diff z); delim: "[") = "grad" f;
+$
+the exterior derivative of a $1$-form is
+$
+  dif (P dif x &+ Q dif y + R dif z) \
+  &= (R_y - Q_z) dif y and dif z + (P_z - R_x) dif z and dif x + (Q_x - P_y) dif x and dif y \
+  &arrow.l.r.long mat(R_y - Q_z; P_z - R_x; Q_x - P_y; delim: "[")  = "curl" mat(P; Q; R; delim: "[");
+$
+the exterior derivative of a $2$-form is
+$
+  dif (P dif y and dif z &+ Q dif z and dif x + R dif x and dif y) \
+  &= (P_x + Q_y + R_z) dif x and dif y and dif z \
+  &arrow.l.r.long P_x + Q_y + R_z = "div" mat(P; Q; R; delim: "[").
+$
+In summary,
+$
+  &Omega^0(U) arrow.r.long^dif &Omega^1(U) arrow.r.long^dif &Omega^2(U) arrow.r.long^dif &Omega^3(U) \
+  &tilde.eq arrow.b &tilde.eq arrow.b &tilde.eq arrow.b &tilde.eq arrow.b \
+  &cal(F)(U) arrow.r.long_("grad") &frak(X)(U) arrow.r.long_("curl") &frak(X)(U) arrow.r.long_("div") &cal(F)(U).
+$
+
+#proposition(label: <RR3>)[
+  + $"curl" ("grad" f) = mat(0; 0; 0; delim: "[")$.
+  + $"div" ("curl" mat(P; Q; R; delim: "[")) = 0$.
+  + On $RR^3$, a vector fielf $F$ is the gradient of some scalar function $f$ if and only if $"curl" F = 0$, i.e., a $1$-form is exact if and only if it is closed on $RR^3$.
+]
+
+Whether @RR3 (iii) is true for a region $U$ depends only on the topology of $U$.
+#definition[
+  The quatient vector space
+  $
+    H^k (U) = {"closed" k"-forms on" U} / {"exact" k"-forms on" U}
+  $
+  measures the failure of closed forms to be exact, and is called the *$k$-th de Rham cohomology* of $U$.
+]
+#lemma(title: "Poincaré lemma")[
+  For $k gt.eq 1$, every closed $k$-form on $RR^n$ is exact, leading to the vanishing of $H^k (RR^n)$.
+]
+
+== Convention on Subscripts and Superscripts
