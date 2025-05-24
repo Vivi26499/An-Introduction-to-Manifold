@@ -1,12 +1,12 @@
 #import "@preview/showybox:2.0.4": showybox
-// Main noteworthy function
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
 #let noteworthy(
   paper-size: "a4",
   font: "New Computer Modern",
   language: "EN",
   title: none,
   author: none,
-  contact-details: none,
+  chapter: none,
   toc-title: "Table of Contents",
   watermark: none,
   content,
@@ -40,8 +40,8 @@
         columns: (1fr, 1fr, 1fr),
         align: (left, center, right),
         author,
-        if contact-details != none {
-          [#sym.diamond.filled #contact-details #sym.diamond.filled]
+        if chapter != none {
+          [#sym.diamond.filled Chapter #chapter #sym.diamond.filled]
         },
         counter(page).display(
           "(1/1)",
@@ -66,7 +66,7 @@
 
   // Heading settings
   show heading.where(level: 1): set heading(numbering: "1")
-  set enum(numbering: "(a)")
+  set enum(numbering: "(a.i)")
 
   // Paragraph settings
   set par(justify: true)

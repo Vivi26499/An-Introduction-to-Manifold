@@ -5,7 +5,7 @@
   language: "EN",
   title: "An Introduction to Manifold",
   author: "Vivi",
-  contact-details: "Chapter 1",
+  chapter: 1,
 )
 #section[Smooth Functions on a Euclidean Space]
 
@@ -421,4 +421,157 @@ $
 
 #prob[
   Let $alpha$ be a nonzero 1-covector and $gamma$ a $k$-covector on a finite-dimensional vector space $V$. Show that $alpha and gamma = 0$ if and only if $gamma = alpha and beta$ for some $(k - 1)$-covector $beta$ on $V$.
+]
+
+#section[Differential Forms on $RR^n$]
+
+#prob[
+  Let $omega$ be the 1-form $z dif x - dif z$ and let $X$ be the vector field $y diff / (diff x) + x diff / (diff y)$ on $RR^3$. Compute $omega(X)$ and $dif omega$.
+]
+#sol[
+  $
+    omega(X) &= (z dif x - dif z)(y diff/(diff x) + x diff/(diff y)) \
+    &= z y 
+  $
+  $
+    dif omega &= dif (z dif x - dif z) \
+    &= (diff z) / (diff z) dif z and dif x \
+    &= dif z and dif x
+  $
+]
+
+#prob[
+  At each point $p in RR^3$, define a bilinear function $omega_p$ on $T_p (RR^3)$ by
+  $
+    omega_p (bold(a), bold(b)) = omega_p (mat(a^1; a^2; a^3; delim: "["), mat(b^1; b^2; b^3; delim: "[")) = p^3 det mat(a^1, b^1; a^2, b^2; delim: "["),
+  $
+  for tangent vectors $bold(a), bold(b) in T_p (RR^3)$, where $p^3$ is the third component of $p = (p^1, p^2, p^3)$. Since $omega_p$ is an alternating bilinear function on $T_p (RR^3)$, $omega$ is a 2-form on $RR^3$. Write $omega$ in terms of the standard basis $dif x^i and dif x^j$ at each point.
+]
+#sol[
+  Let $omega = omega_(12) dif x^1 and dif x^2 + omega_(13) dif x^1 and dif x^3 + omega_(23) dif x^2 and dif x^3$, 
+  $
+    omega(bold(a), bold(b)) &= omega_(12) (a^1 b^2 - a^2 b^1) + omega_(13) (a^1 b^3 - a^3 b^1) + omega_(23) (a^2 b^3 - a^3 b^2) \
+    &= x^3 det mat(a^1, b^1; a^2, b^2; delim: "[") \
+    &= x^3 (a^1 b^2 - a^2 b^1),
+  $
+  then, $omega_(12) = x^3$, $omega_(13) = omega_(23) = 0$. Thus, we have
+  $
+    omega = x^3 dif x^1 and dif x^2.
+  $
+]
+
+#prob[
+  Suppose the standard coordinates on $RR^2$ are called $r$ and $theta$ (this $RR^2$ is the $(r,theta)$-plane, not the $(x,y)$-plane). If $x = r cos theta$ and $y = r sin theta$, calculate $dif x$, $dif y$, and $dif x and dif y$ in terms of $dif r$ and $dif theta$.
+]
+#sol[
+  $
+    dif x &= (diff x) / (diff r) dif r + (diff x) / (diff theta) dif theta \
+    &= cos theta dif r - r sin theta dif theta,
+  $
+  $
+    dif y &= (diff y) / (diff r) dif r + (diff y) / (diff theta) dif theta \
+    &= sin theta dif r + r cos theta dif theta,
+  $
+  $
+    dif x and dif y &= (cos theta dif r - r sin theta dif theta) and (sin theta dif r + r cos theta dif theta) \
+    &= (r cos^2 theta + r sin^2 theta) dif r and dif theta \
+    &= r dif r and dif theta \
+  $
+]
+
+#prob[
+  Suppose the standard coordinates on $RR^3$ are called $rho$, $phi$, and $theta$. If $x = rho sin phi cos theta$, $y = rho sin phi sin theta$, and $z = rho cos phi$, calculate $dif x$, $dif y$, $dif z$, and $dif x and dif y and dif z$ in terms of $dif rho$, $dif phi$, and $dif theta$.
+]
+#sol[
+  $
+    dif x &= (diff x) / (diff rho) dif rho + (diff x) / (diff phi) dif phi + (diff x) / (diff theta) dif theta \
+    &= sin phi cos theta dif rho + rho cos phi cos theta dif phi - rho sin phi sin theta dif theta,
+  $
+  $
+    dif y &= (diff y) / (diff rho) dif rho + (diff y) / (diff phi) dif phi + (diff y) / (diff theta) dif theta \
+    &= sin phi sin theta dif rho + rho cos phi sin theta dif phi + rho sin phi cos theta dif theta,
+  $
+  $
+    dif z &= (diff z) / (diff rho) dif rho + (diff z) / (diff phi) dif phi + (diff z) / (diff theta) dif theta \
+    &= cos phi dif rho - rho sin phi dif phi,
+  $
+  $
+    dif x and dif y and dif z &= (sin phi cos theta dif rho + rho cos phi cos theta dif phi - rho sin phi sin theta dif theta) \
+    &and (sin phi sin theta dif rho + rho cos phi sin theta dif phi + rho sin phi cos theta dif theta) \
+    &and (cos phi dif rho - rho sin phi dif phi) \
+    &= sin phi cos theta(0 + rho sin phi cos theta rho sin phi) dif rho and dif phi and dif theta \
+    &+ rho cos phi cos theta(0 - rho sin phi cos theta cos phi) dif phi and dif rho and dif theta \
+    &- rho sin phi sin theta(- sin phi sin theta rho sin phi - rho cos phi sin theta cos phi) dif theta and dif rho and dif phi \
+    &= [rho^2 sin^3 phi cos^2 theta - (- rho^2 sin phi cos^2 phi cos^2 theta) \
+    &+ rho^2 sin phi sin^2 theta (sin^2 phi + cos^2 phi)] dif rho and dif phi and dif theta \
+    &= rho^2 sin phi (sin^2 phi cos^2 theta + cos^2 phi cos^2 theta + sin^2 theta) dif rho and dif phi and dif theta \
+    &= rho^2 sin phi (sin^2 phi + cos^2 phi) dif rho and dif phi and dif theta \
+    &= rho^2 sin phi dif rho and dif phi and dif theta \
+  $
+]
+
+#prob[
+  Let $alpha$ be a 1-form and $beta$ a 2-form on $RR^3$. Then
+  $
+    alpha = a_1 dif x^1 + a_2 dif x^2 + a_3 dif x^3,
+  $
+  $
+    beta = b_1 dif x^2 and dif x^3 + b_2 dif x^3 and dif x^1 + b_3 dif x^1 and dif x^2.
+  $
+  Simplify the expression $alpha and beta$ as much as possible.
+]
+#sol[
+  $
+    alpha and beta &= (a_1 dif x^1 + a_2 dif x^2 + a_3 dif x^3) and (b_1 dif x^2 and dif x^3 + b_2 dif x^3 and dif x^1 + b_3 dif x^1 and dif x^2) \
+    &= (a_1 b_1) dif x^1 and dif x^2 and dif x^3 + (a_2 b_2) dif x^2 and dif x^3 and dif x^1 + (a_3 b_3) dif x^3 and dif x^1 and dif x^2 \
+    &= (a_1 b_1 + a_2 b_2 + a_3 b_3) dif x^1 and dif x^2 and dif x^3
+  $
+]
+
+#prob[
+  The correspondence between differential forms and vector fields on an open subset of $RR^3$ in Subsection 4.6 also makes sense pointwise. Let $V$ be a vector space of dimension 3 with basis $e_1, e_2, e_3$, and dual basis $alpha^1, alpha^2, alpha^3$. To a 1-covector $alpha = a_1 alpha^1 + a_2 alpha^2 + a_3 alpha^3$ on $V$, we associate the vector $bold(v)_alpha = angle.l a_1, a_2, a_3 angle.r in RR^3$. To the 2-covector
+  $
+    gamma = c_1 alpha^2 and alpha^3 + c_2 alpha^3 and alpha^1 + c_3 alpha^1 and alpha^2
+  $
+  on $V$, we associate the vector $bold(v)_gamma = angle.l c_1, c_2, c_3 angle.r in RR^3$. Show that under this correspondence, the wedge product of 1-covectors corresponds to the cross product of vectors in $RR^3$: if $alpha = a_1 alpha^1 + a_2 alpha^2 + a_3 alpha^3$ and $beta = b_1 alpha^1 + b_2 alpha^2 + b_3 alpha^3$, then $bold(v)_(alpha and beta) = bold(v)_alpha times bold(v)_beta$.
+]
+#sol[
+  $
+    bold(v)_(alpha and beta) &= (a_1 alpha^1 + a_2 alpha^2 + a_3 alpha^3) and (b_1 alpha^1 + b_2 alpha^2 + b_3 alpha^3) \
+    &= (a_2 b_3 - a_3 b_2) alpha^2 and alpha^3 + (a_3 b_1 - a_1 b_3) alpha^3 and alpha^1 + (a_1 b_2 - a_2 b_1) alpha^1 and alpha^2,
+  $
+  which corresponds to the vector
+  $
+    bold(v)_(alpha and beta) &= angle.l a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1 angle.r \
+    &= bold(v)_alpha times bold(v)_beta \
+  $
+]
+
+#prob[
+  Let $A = xor.big_(k=-infinity)^infinity A^k$ be a graded algebra over a field $K$ with $A^k = 0$ for $k < 0$. Let $m$ be an integer. A _superderivation of $A$ of degree $m$_ is a $K$-linear map $D: A -> A$ such that for all $k$, $D(A^k) subset A^(k+m)$ and for all $a in A^k$ and $b in A^l$,
+  $
+    D(a b) = (D a)b + (-1)^(k m) a(D b).
+  $
+  If $D_1$ and $D_2$ are two superderivations of $A$ of respective degrees $m_1$ and $m_2$, define their _commutator_ to be
+  $
+    [D_1, D_2] = D_1 compose D_2 - (-1)^(m_1 m_2) D_2 compose D_1.
+  $
+  Show that $[D_1, D_2]$ is a superderivation of degree $m_1 + m_2$. (A superderivation is said to be _even_ or _odd_ depending on the parity of its degree. An even superderivation is a derivation; an odd superderivation is an antiderivation.)
+]
+#sol[
+  $
+    [D_1, D_2](a b) &= (D_1 compose D_2 - (-1)^(m_1 m_2) D_2 compose D_1)(a b) \
+    &= (D_1 compose D_2)(a b) - (-1)^(m_1 m_2) (D_2 compose D_1)(a b) \
+    &= D_1(D_2(a b)) - (-1)^(m_1 m_2) D_2(D_1(a b)) \
+    &= D_1[(D_2 a)b + (-1)^(k m_2) a(D_2 b)] - (-1)^(m_1 m_2) D_2[(D_1 a)b + (-1)^(k m_1) a(D_1 b)] \
+    &= (D_1 (D_2 a))b + (-1)^((k + m_2)m_1) (D_2 a)(D_1 b) + (-1)^(k m_2) [(D_1 a)(D_2 b) + (-1)^(k m_1) a(D_1 (D_2 b))] \
+    &- (-1)^(m_1 m_2) {(D_2 (D_1 a))b + (-1)^((k + m_1)m_2) (D_1 a)(D_2 b) + (-1)^(k m_1) [(D_2 a)(D_1 b) + (-1)^(k m_2) a(D_2 (D_1 b)]} \
+    &= (D_1 (D_2 a))b + [(-1)^((k + m_2)m_1) - (-1)^(m_1 m_2 + k m_1)] (D_2 a)(D_1 b) \
+    &+ [(-1)^(k m_2) - (-1)^(m_1 m_2 + (k + m_1)m_2)] (D_1 a)(D_2 b) + (-1)^(k m_2 + k m_1) a (D_1 (D_2 b)) \
+    &- (-1)^(m_1 m_2) (D_2 (D_1 a))b - (-1)^(m_1 m_2 + k m_1 + k m_2) a (D_2 (D_1 b)) \
+    &= (D_1 (D_2 a))b + (-1)^(k(m_1 + m_2)) a (D_1 (D_2 b)) - (-1)^(m_1 m_2) (D_2 (D_1 a))b - (-1)^((k+1)(m_1 + m_2)) a (D_2 (D_1 b)) \
+    &= [D_1 (D_2 a) - (-1)^(m_1 m_2) (D_2 (D_1 a))] b + (-1)^(k(m_1 + m_2)) a[D_1 (D_2 b) - (-1)^(m_1 m_2) (D_2 (D_1 b))] \
+    &= ([D_1, D_2](a)) b + (-1)^(k(m_1 + m_2)) a([D_1, D_2](b)),
+  $
+  which gives us the result that $[D_1, D_2]$ is a superderivation of degree $m_1 + m_2$.
 ]

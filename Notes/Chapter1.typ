@@ -7,9 +7,9 @@
   title: "An Introduction to Manifold",
   author: "Vivi",
   toc-title: "Chapter 1 Euclidean Spaces",
+  chapter: 1
 )
-#show ref: theoretic.show-ref
-#set enum(numbering: "(i)")
+
 = Smooth Functions on a Euclidean Space
 The calculus of $C^infinity$ functions will be our primary tool for studying higher-dimensional manifolds.
 
@@ -313,7 +313,7 @@ The basis $alpha^1, dots.c, alpha^n$ of $V^or$ is said to be _dual_ to the basis
   The *cyclic permutation*, $(a_1 thick dots.c thick a_r)$ where $a_i$ are distinct, is the permutation $sigma$ such that $sigma(a_1) = a_2, dots.c, sigma(a_(r-1)) = a_r, sigma(a_r) = a(1)$ and fixes all other elements of $A$. A cyclic permutation $(a_1, dots.c, a_r)$ is called a *cycle of length $r$* or a *r-cycle*. \
   A *transposition* is a $2$-cycle, i.e., a cycle of the form $(a_1 thick a_2)$ that interchanges $a_1$ and $a_2$ and fixes all other elements of $A$. \
   Two cycles $(a_1 thick dots.c thick a_r)$ and $(b_1 thick dots.c thick b_s)$ are *disjoint* if $a_i eq.not b_j$ for all $i$ and $j$. \
-  The *product* $tau sigma$ of two permutations $sigma$ and $tau$ of $A$ is the composition $tau thick circle.small thick sigma$.
+  The *product* $tau sigma$ of two permutations $sigma$ and $tau$ of $A$ is the composition $tau thick compose thick sigma$.
 ]
 Any permutation can be written as a product of disjoint cycles $(a_1 thick dots.c thick a_r)(b_1 thick dots.c thick b_s) thick dots.c$.
 #definition[
@@ -1072,7 +1072,7 @@ $
 ]
 
 #definition[
-  A collection of vector spaces ${V^k}_(k=0)^infinity$ with linear maps $d_k: V^k arrow.r V^(k + 1)$ such that $d_(k+1) thick circle.small thick d_k = 0$ is called a *differential complex* or a *cochain complex*. For any open set $U subset RR^n$, the exterior derivative $d$ makes $Omega^* (U)$ into a differential complex, called the *de Rham complex* of $U$:
+  A collection of vector spaces ${V^k}_(k=0)^infinity$ with linear maps $d_k: V^k arrow.r V^(k + 1)$ such that $d_(k+1) thick compose thick d_k = 0$ is called a *differential complex* or a *cochain complex*. For any open set $U subset RR^n$, the exterior derivative $d$ makes $Omega^* (U)$ into a differential complex, called the *de Rham complex* of $U$:
   $
     0 arrow.r Omega^0 (U) arrow.r^dif Omega^1 (U) arrow.r^dif Omega^2 (U) arrow.r^dif dots.c.
   $

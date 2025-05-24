@@ -1,7 +1,7 @@
 // All imports
 #import "@preview/theoretic:0.2.0" as theoretic: theorem, proof, qed
-
 #import "@preview/showybox:2.0.4": showybox
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
 // Main noteworthy function
 #let noteworthy(
   paper-size: "a4",
@@ -9,7 +9,7 @@
   language: "EN",
   title: none,
   author: none,
-  contact-details: none,
+  chapter: none,
   toc-title: "Table of Contents",
   watermark: none,
   content,
@@ -43,8 +43,8 @@
         columns: (1fr, 1fr, 1fr),
         align: (left, center, right),
         author,
-        if contact-details != none {
-          [#sym.diamond.filled #link(contact-details) #sym.diamond.filled]
+        if chapter != none {
+          [#sym.diamond.filled Chapter #chapter #sym.diamond.filled]
         },
         counter(page).display(
           "(1/1)",
@@ -70,6 +70,7 @@
   // Heading settings
   set heading(numbering: "1.")
   set math.equation(numbering: "(1)", number-align: bottom)
+  set enum(numbering: "(i.a)")
 
   show ref: it => {
     let eq = math.equation
@@ -85,7 +86,7 @@
       it
     }
   }
-
+  show math.equation: set block(breakable: true)
   // Paragraph settings
   set par(justify: true)
 
@@ -113,6 +114,7 @@
     ),
   )
 
+  show ref: theoretic.show-ref
   // Main content
   content
 }
@@ -190,3 +192,18 @@
     h(1em)
   },
 )
+
+#let remark = theorem.with(
+  kind: "remark",
+  supplement: "Remark",
+  fmt-prefix: (s, n, t) => {
+    text(weight: "bold", stretch: 85%)[#s #n]
+    if t != none [ (#t)]
+    h(1em)
+  },
+)
+
+#let sol(body) = {
+  context[_Solution._]
+  body
+}
